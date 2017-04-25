@@ -18,7 +18,7 @@ $ cd $COURSE_HOME/session_03/lab_03/cf-scale-boot
 . Spring Boot CLI applications do not require a separate build step, so go ahead and push the application:
 +
 ----
-$ cf push cf-scale-boot-{{your-initials}}
+$ cf push 
 ----
 
 . Once again, this application's manifest is configured to have a random route assigned to the application.
