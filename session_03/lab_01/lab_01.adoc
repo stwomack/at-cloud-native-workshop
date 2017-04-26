@@ -9,7 +9,7 @@
 . From a command prompt, set the API target for the CLI:
 +
 ----
-$ cf api --skip-ssl-validation https://apps.sys.dev.cf.pa.fedex.com
+$ cf api --skip-ssl-validation https://api.sys.dev.cf.pa.fedex.com
 ----
 
 . Login to Pivotal Cloud Foundry (‘Employee ID’ and password (LDAP)):
