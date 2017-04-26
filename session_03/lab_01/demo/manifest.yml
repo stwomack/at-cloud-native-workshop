@@ -1,7 +1,0 @@
----
-applications:
-- name: orders-service-${random-word}
-  memory: 512M
-  instances: 1
-  host: orders-service-${random-word}
-  path: target/orders-service-0.0.1-SNAPSHOT.jar
