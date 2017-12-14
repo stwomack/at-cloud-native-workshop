@@ -139,4 +139,4 @@ Once the application is running again, revisit or refresh the /health actuator e
 As you can see, the application is now utilizing a MySQL database via the `orders-service-db` service.
 We made no code or configuration changes in order to accomplish this. We simply told Cloud Foundry to bind us to this external service, and it did. Spring Connectors take care of wiring up connections to H2, MySql, Other Relational and NoSQL DBs, Message Brokers, etc.
 
-link:/README.md#course-materials[Course Materials home] | link:/session_03/lab_03/lab_03.adoc[Lab 3 - Scaling Applications]
+link:/README.md#course-materials[Course Materials home] | link:/session_02/lab_03/lab_03.adoc[Lab 3 - Scaling Applications]
