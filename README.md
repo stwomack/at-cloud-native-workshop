@@ -76,6 +76,4 @@ In order to perform the labs, you must be connected or logged into a live PCF en
 ### _Wrap-up, Q&A_ [(Slides)](session_wrapup/Session_Wrap-up.pdf)
 
 ## Speakers & Instructors
-- Dan Kennedy, Pivotal, dkennedy@pivotal.io
 - Steve Womack, Pivotal, swomack@pivotal.io
-- Brian Jimerson, Pivotal, bjimerson@pivotal.io
