@@ -156,14 +156,14 @@ OK
 +
 ----
 $cf api
-API endpoint: https://api.sys.cf.pa.fedex.com (API version: 2.43.0)
+API endpoint: https://api.sys.cloud-01.pcf.ascension.org (API version: 2.43.0)
 ----
 
 . Enable Spring Cloud Services to add the certificate automatically by setting the CF_TARGET environment variable on the hello-server and hello-ui applications to the API endpoint of your Elastic Runtime instance. First do this for the hello-server application.
 +
 ----
-$cf set-env hello-server CF_TARGET https://api.sys.cf.pa.fedex.com
-Setting env variable 'CF_TARGET' to 'https://api.sys.cf.pa.fedex.com' for app hello-server in org instructor-org / space development as instructor...
+$cf set-env hello-server CF_TARGET https://api.sys.cloud-01.pcf.ascension.org
+Setting env variable 'CF_TARGET' to 'https://api.sys.cloud-01.pcf.ascension.org' for app hello-server in org instructor-org / space development as instructor...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
 ----
@@ -171,8 +171,8 @@ TIP: Use 'cf restage' to ensure your env variable changes take effect
 . Then repeat for the hello-ui application
 +
 ----
-$cf set-env hello-ui CF_TARGET https://api.sys.cf.pa.fedex.com
-Setting env variable 'CF_TARGET' to 'https://api.sys.cf.pa.fedex.com' for app hello-ui in org instructor-org / space development as instructor...
+$cf set-env hello-ui CF_TARGET https://api.sys.cloud-01.pcf.ascension.org
+Setting env variable 'CF_TARGET' to 'https://api.sys.cloud-01.pcf.ascension.org' for app hello-ui in org instructor-org / space development as instructor...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
 ----
