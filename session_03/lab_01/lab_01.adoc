@@ -24,7 +24,7 @@ Follow the prompts, choosing default organization and space.
 
 . Go to http://start.spring.io/ in your browser
 . Change the 'Group' field to 'com.workshop' .
-. Change the app name from demo to orders-service
+. Change the artifact from demo to orders-service
 . Add the following dependencies individually:
 +
 ----
