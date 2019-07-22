@@ -30,9 +30,9 @@ Follow the prompts, choosing default organization and space.
 ----
 Spring Data JPA
 Rest Repositories
-MySQL
-H2
-Actuator
+MySQL Driver
+H2 Database
+Spring Boot Actuator
 Lombok
 ----
 . Click 'Generate Project', and save the .zip file to this directory $COURSE_HOME/session_03/lab_01 ($COURSE_HOME is a pointer to where you cloned this repo )
@@ -50,7 +50,7 @@ spring.jpa.hibernate.ddl-auto=create
 . Create a class, OrderItem.java, in src/main/java/com/workshop , and paste in the following contents:
 +
 ```
-package com.workshop;
+package com.workshop.ordersservice;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -81,7 +81,7 @@ public class OrderItem {
 Note that project Lombok takes care of boilerplate code like getters & setters
 . Finally, replace the contents of /src/main/java/com/workshop/OrderServiceApplication.java with the following
 ```
-package com.workshop;
+package com.workshop.ordersservice;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
