@@ -28,7 +28,7 @@ Follow the prompts, choosing default organization and space.
 . Add the following dependencies individually:
 +
 ----
-JPA
+Spring Data JPA
 Rest Repositories
 MySQL
 H2
