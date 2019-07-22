@@ -3,5 +3,5 @@ applications:
 - name: orders-service
   memory: 512M
   instances: 1
-  host: orders-service-${random-word}
+  random-route: true
   path: target/orders-service-0.0.1-SNAPSHOT.jar
