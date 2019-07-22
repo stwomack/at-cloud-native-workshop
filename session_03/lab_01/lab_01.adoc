@@ -28,7 +28,12 @@ Follow the prompts, choosing default organization and space.
 . Add the following dependencies individually:
 +
 ----
-JPA Rest Repositories MySQL H2 Actuator Lombok
+JPA
+Rest Repositories
+MySQL
+H2
+Actuator
+Lombok
 ----
 . Click 'Generate Project', and save the .zip file to this directory $COURSE_HOME/session_03/lab_01 ($COURSE_HOME is a pointer to where you cloned this repo )
 . Unzip the project
