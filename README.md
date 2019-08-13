@@ -30,7 +30,7 @@ The overwhelming majority of our time will be spent engaging with the technology
 **Prerequisites**
 
 Start by downloading and installing the appropriate prerequisite tools.
-- [Cloud Foundry CLI](https://goo.gl/M0pH4i) to interact with a cloud foundry instance
+- [Cloud Foundry CLI](MAC: https://cli.run.pivotal.io/stable?release=macosx64&source=pws, Windows: https://cli.run.pivotal.io/stable?release=windows64&source=pws) to interact with a cloud foundry instance
 - [Git Client](https://git-scm.com/downloads) to clone Github repo or download and unzip
 - An IDE, like [Spring Tool Suite](https://spring.io/tools/sts/all) or [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 - [Java SE Development Kit](http://info.pivotal.io/n0I60i3021AN0JU0le10CRR)
