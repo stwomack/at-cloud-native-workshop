@@ -262,7 +262,7 @@ In the example `cf push` above, the `urls:` section of the application health re
 
 . We've just built out the most simple of RESTful APIs, with hypermedia support included. View the /orderItems endpoint of your application to see what has already been added in the database
 
-Because our application knows nothing about any backing databases, and h2 is on the classpath, h2's in memory database will be used when this application starts up. Look at the /health actuator endpoint of your application to see that there's no backing database reported. In the next lab, we'll bind a backing database
+Because our application knows nothing about any backing databases, and h2 is on the classpath, h2's in memory database will be used when this application starts up. Look at the /actuator/health actuator endpoint of your application to see that there's no backing database reported. In the next lab, we'll bind a backing database
 ```
 "db": {
 "status": "UP",
