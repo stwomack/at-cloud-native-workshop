@@ -2,16 +2,15 @@
 Cloud Native Application development with Spring and Cloud Foundry. Join Pivotal for a half-day hands-on workshop to introduce key concepts in modern cloud native application development and delivery. The labs will leverage Spring Boot, along with sessions for Actuator 
 
 **Events**
-- Stay informed for the [2017 SpringOne Platform](https://springoneplatform.io/) to be held in San Francisco, CA, December 4-7, 2017.
+- Stay informed for the [2019 SpringOne Platform](https://springoneplatform.io/) to be held in Austin, TX, Oct 7-10, 2019.
 
 ## Agenda
 
 Time | Session
 ---- | -------
-8:00 AM - 8:30 AM | _Breakfast & Introductions_
-8:30 AM - 9:00 AM | _Session 1: Workshop Kickoff_
-9:00 - 9:30 AM | _Session 2: Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
-9:30 AM - 11:00 PM | _Session 3: Enabling Continuous Delivery with 'cf push' (*LABS*)_
+9:00 AM - 9:30 AM | _Session 1: Workshop Kickoff_
+9:30 - 9:45 AM | _Session 2: Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
+9:45 AM - 11:00 PM | _Session 3: Enabling Continuous Delivery with 'cf push' (*LABS*)_
 11:00 PM- 11:15 PM | _Break_
 11:15 PM - 12:00 PM | _Session 4: Cloud Native Platforms_
 12:00 PM - 1:00 PM | _Lunch_
