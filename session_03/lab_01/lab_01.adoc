@@ -30,7 +30,7 @@ Follow the prompts, choosing default organization and space.
 ----
 Spring Data JPA
 Rest Repositories
-MySQL Driver
+GCP Support
 H2 Database
 Spring Boot Actuator
 Lombok
