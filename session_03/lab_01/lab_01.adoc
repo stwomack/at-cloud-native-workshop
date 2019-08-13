@@ -2,7 +2,7 @@
 
 == Target
 
-. If you haven't already, download the latest release of the link:https://github.com/cloudfoundry/cli#installers-and-compressed-binaries[Cloud Foundry CLI] for your operating system and install it.
+. If you haven't already, download the latest release of the PCF CLI for your operating system and install it.
 
 . Use the API target and username/password provided by the instructor..
 
@@ -15,7 +15,7 @@ $ cf api --skip-ssl-validation https://api.sys.cloud01.ascension.org
 . Login to Pivotal Cloud Foundry (‘Employee ID’ and password (LDAP)):
 +
 ----
-$ cf login -u <Employee ID> -p <your pw>
+$ cf login -u <your username>
 ----
 +
 Follow the prompts, choosing default organization and space.
