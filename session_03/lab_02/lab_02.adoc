@@ -58,7 +58,7 @@ OK
 . Next we'll _bind_ the newly created instance to our `orders-service` application:
 +
 ----
-$ cf bind-service orders-service orders-service-db  -c '{"role":"cloudsql.editor"}'
+$ cf bind-service orders-service orders-service-db -c '{"role":"cloudsql.editor"}'
 Binding service orders-service-db to app orders-service in org oreilly-class / space instructor as swomack@pivotal.io...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
