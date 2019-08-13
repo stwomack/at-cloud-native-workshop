@@ -15,7 +15,7 @@ Time | Session
 10:45 AM - 12:00 PM | _Enabling Continuous Delivery with 'cf push' (*LABS*)_
 12:00 PM - 1:00 PM | _Lunch_
 1:00 PM - 1:15 PM | _Spring Boot Overview_
-1:30 PM - 2:00 PM | _Developer Workshop (Continued)_
+1:15 PM - 2:00 PM | _Developer Workshop (Continued)_
 2:00 PM - 2:30 PM | _Wrap-up, Q&A_
 
 _*See [Labs Materials](#labs-materials) section below for slides and labs_
