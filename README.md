@@ -53,8 +53,6 @@ In order to perform the labs, you must be connected or logged into a live PCF en
 
 ## Labs Materials
 
-### _Breakfast and Introductions_
-
 ### _Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_ [(Slides)](session_02/Session_02-Cloud_Native_Architectures_and_Frameworks.pptx)
 
 ### _Enabling Continuous Delivery with 'cf push'_
