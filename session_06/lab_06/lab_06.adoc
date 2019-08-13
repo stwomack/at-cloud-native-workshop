@@ -40,7 +40,7 @@ image::../../Common/images/lab8screenshot1.png[]
 +
 image::../../Common/images/lab8screenshot2.png[]
 +
-. Later you will set up your own configuration repository in Github.  For now, enter "https://github.com/bboe-pivotal/hello-world-config-repo". Click Submit when ready.
+. Later you will set up your own configuration repository in Github.  For now, enter "https://github.com/stwomack/womack-configrepo". Click Submit when ready.
 +
 image::../../Common/images/lab8screenshot3.png[]
 
