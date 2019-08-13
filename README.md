@@ -8,17 +8,17 @@ Cloud Native Application development with Spring and Cloud Foundry. Join Pivotal
 
 Time | Session
 ---- | -------
-9:00 AM - 9:15 AM | _Session 1: Workshop Kickoff And Intros_
-9:15 - 9:45 AM | _Session 2: Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
-9:45 AM - 11:00 PM | _Session 3: Enabling Continuous Delivery with 'cf push' (*LABS*)_
+9:00 AM - 9:15 AM | _Workshop Kickoff And Intros_
+9:15 - 9:45 AM | _Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
+9:45 AM - 11:00 PM | _Enabling Continuous Delivery with 'cf push' (*LABS*)_
 11:00 PM- 11:15 PM | _Break_
-11:15 PM - 12:00 PM | _Session 4: Cloud Native Platforms_
+11:15 PM - 12:00 PM | _Cloud Native Platforms_
 12:00 PM - 1:00 PM | _Lunch_
-1:00 PM - 1:30 PM | _Session 5: Spring Boot Overview_
+1:00 PM - 1:30 PM | _Spring Boot Overview_
 1:30 PM - 2:00 PM | _Developer Workshop (Continued)_
 2:00 PM - 2:30 PM | _Wrap-up, Q&A_
 
-_*See [Course Materials](#course-materials) section below for slides and labs_
+_*See [Labs Materials](#labs-materials) section below for slides and labs_
 
 This is a _loose_ schedule for the day. We will adjust as necessary based on our pace through the material. We'll take breaks as the group agrees
 
@@ -51,11 +51,9 @@ When labs reference $COURSE_HOME, that's where you checked out this repository
 
 In order to perform the labs, you must be connected or logged into a live PCF environment.
 
-## Course Materials
+## Labs Materials
 
 ### _Breakfast and Introductions_
-
-### _Workshop Kickoff - Pivotal-Syntel Partnership_ [(Slides)](session_01/Session_01-kickoff.pptx)
 
 ### _Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_ [(Slides)](session_02/Session_02-Cloud_Native_Architectures_and_Frameworks.pptx)
 
@@ -71,8 +69,3 @@ In order to perform the labs, you must be connected or logged into a live PCF en
 
 ### _Spring Boot and Actuator_ [(Slides)](session_05/Session_05-Spring_Boot_Actuator-2xpg.pdf)
   - [Lab 5 - Introspection, Monitoring, and Metrics using Spring Boot Actuator](session_05/lab_05/lab_05.adoc)
-
-### _Wrap-up, Q&A_ [(Slides)](session_wrapup/Session_Wrap-up.pdf)
-
-## Speakers & Instructors
-- Steve Womack, Pivotal, swomack@pivotal.io
