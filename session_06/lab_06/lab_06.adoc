@@ -49,7 +49,7 @@ image::../../Common/images/lab8screenshot3.png[]
 . Change to the directory that contains hello-ui and hello-server components.
 +
 ----
-$ cd $COURSE_HOME/session_05/lab_08/hello-world
+$ cd $COURSE_HOME/session_06/lab_06/hello-world
 ----
 
 . Open the manifest.yml file.  Notice the application names and the service bindings.
