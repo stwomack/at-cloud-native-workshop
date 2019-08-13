@@ -111,4 +111,4 @@ image::../../Common/images/lab10screenshot2.png[]
 +
 image::../../Common/images/lab10screenshot3.png[]
 
-link:/README.md#course-materials[Course Materials home] | link:/session_04/lab_09/lab_09.adoc[Lab 9 - Circuit Breaker Dashboard]
+link:/README.md#course-materials[Course Materials home] | link:/session_06/lab_09/lab_09.adoc[Lab 9 - Circuit Breaker Dashboard]
