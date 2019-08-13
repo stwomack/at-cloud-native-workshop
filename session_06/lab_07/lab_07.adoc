@@ -9,4 +9,4 @@ image::../../Common/images/lab9screenshot1.png[]
 +
 image::../../Common/images/lab9screenshot2.png[]
 
-link:/README.md#course-materials[Course Materials home] | link:/session_04/lab_08/lab_08.adoc[Lab 8 - Config Server]
+link:/README.md#course-materials[Course Materials home] | link:/session_06/lab_08/lab_08.adoc[Lab 8 - Config Server]
