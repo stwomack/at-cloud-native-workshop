@@ -12,7 +12,7 @@
 $ cf api --skip-ssl-validation https://api.sys.cloud01.ascension.org
 ----
 
-. Login to Pivotal Cloud Foundry (‘Employee ID’ and password (LDAP)):
+. Login to Pivotal Cloud Foundry (username and password):
 +
 ----
 $ cf login -u <your username>
