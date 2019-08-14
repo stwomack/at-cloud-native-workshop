@@ -12,7 +12,7 @@ Time | Session
 9:15 - 9:45 AM | _Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
 9:45 PM- 10:00 PM | _Break_
 10:00 - 10:45 AM | _PCF & Isidore Overview and Onboarding_ 
-10:45 AM - 12:00 PM | _Enabling Continuous Delivery with 'cf push' (*LABS*)_
+10:45 AM - 12:00 PM | _Developer Workshop (*LABS*)_
 12:00 PM - 1:00 PM | _Lunch_
 1:00 PM - 1:15 PM | _Spring Boot Overview_
 1:15 PM - 2:00 PM | _Developer Workshop (Continued)_
