@@ -56,17 +56,18 @@ $ cd $COURSE_HOME/session_06/lab_06/hello-world
 +
 ----
 ---
+---
 memory: 1GB
 instances: 1
 applications:
 - name: hello-server
-  host: hello-server-${random-word}
+  random-route: true
   path: hello-server/target/hello-server-0.0.1-SNAPSHOT.jar
   services:
   - service-registry
   - config-server
 - name: hello-ui
-  host: hello-ui-${random-word}
+  random-route: true
   path: hello-ui/target/hello-ui-0.0.1-SNAPSHOT.jar
   services:
   - service-registry
