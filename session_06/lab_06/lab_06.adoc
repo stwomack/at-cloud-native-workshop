@@ -31,18 +31,6 @@ cf create-service p-circuit-breaker-dashboard standard circuit-breaker
 Creating service instance circuit-breaker in org student20-org / space development as student20...
 OK
 ----
-+
-. First we need to configure the config server. Open the Application Manager console and scroll down until you see the Spring Cloud services.  Under the "config-server", click "Manage".
-+
-image::../../Common/images/lab8screenshot1.png[]
-+
-. You should see a blank page for the Config Server.
-+
-image::../../Common/images/lab8screenshot2.png[]
-+
-. Later you will set up your own configuration repository in Github.  For now, enter "https://github.com/stwomack/womack-configrepo". Click Submit when ready.
-+
-image::../../Common/images/lab8screenshot3.png[]
 
 == Build and Push the applications
 
@@ -110,7 +98,7 @@ $./mvnw package
 +
 ----
 cf push --no-start
-Using manifest file /Users/cbusch/git/stl-cloud-native-spring-workshop/session_05/lab_08/hello-world/manifest.yml
+Using manifest file /stl-cloud-native-spring-workshop/session_06/lab_06/hello-world/manifest.yml
 
 Creating app hello-server in org instructor-org / space development as instructor...
 OK
@@ -122,7 +110,7 @@ Binding hello-server-unstipulated-enrober.cfapps.io to hello-server...
 OK
 
 Uploading hello-server...
-Uploading app files from: /Users/cbusch/git/stl-cloud-native-spring-workshop/session_05/lab_08/hello-world/hello-server/target/hello-server-0.0.1-SNAPSHOT.jar
+Uploading app files from: /stl-cloud-native-spring-workshop/session_06/lab_06/hello-world/hello-server/target/hello-server-0.0.1-SNAPSHOT.jar
 Uploading 1M, 116 files
 Done uploading
 OK
@@ -141,7 +129,7 @@ Binding hello-ui-unsubscribed-teacake.cfapps.io to hello-ui...
 OK
 
 Uploading hello-ui...
-Uploading app files from: /Users/cbusch/git/stl-cloud-native-spring-workshop/session_05/lab_08/hello-world/hello-ui/target/hello-ui-0.0.1-SNAPSHOT.jar
+Uploading app files from: /stl-cloud-native-spring-workshop/session_05/lab_08/hello-world/hello-ui/target/hello-ui-0.0.1-SNAPSHOT.jar
 Uploading 1.2M, 130 files
 Done uploading
 OK
@@ -151,31 +139,6 @@ Binding service config-server to app hello-ui in org instructor-org / space deve
 OK
 Binding service circuit-breaker to app hello-ui in org instructor-org / space development as instructor...
 OK
-----
-
-.  Spring Cloud Services uses HTTPS for all client-to-service communication. If your Pivotal Cloud Foundry installation is using a self-signed SSL certificate, the certificate will need to be added to the JVM truststore before your client application can use a Service Registry service instance to discover a service application. Start by taking note of the Cloud Foundry API endpoint of your environment.
-+
-----
-$cf api
-API endpoint: https://api.sys.cloud-01.pcf.ascension.org (API version: 2.43.0)
-----
-
-. Enable Spring Cloud Services to add the certificate automatically by setting the CF_TARGET environment variable on the hello-server and hello-ui applications to the API endpoint of your Elastic Runtime instance. First do this for the hello-server application.
-+
-----
-$cf set-env hello-server CF_TARGET https://api.sys.cloud-01.pcf.ascension.org
-Setting env variable 'CF_TARGET' to 'https://api.sys.cloud-01.pcf.ascension.org' for app hello-server in org instructor-org / space development as instructor...
-OK
-TIP: Use 'cf restage' to ensure your env variable changes take effect
-----
-
-. Then repeat for the hello-ui application
-+
-----
-$cf set-env hello-ui CF_TARGET https://api.sys.cloud-01.pcf.ascension.org
-Setting env variable 'CF_TARGET' to 'https://api.sys.cloud-01.pcf.ascension.org' for app hello-ui in org instructor-org / space development as instructor...
-OK
-TIP: Use 'cf restage' to ensure your env variable changes take effect
 ----
 
 . Now the applications are ready to run. First start the hello-server application.
