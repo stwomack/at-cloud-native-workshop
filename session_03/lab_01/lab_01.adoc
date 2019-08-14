@@ -5,17 +5,11 @@
 . If you haven't already, download the latest release of the PCF CLI for your operating system and install it.
 
 . Use the API target and username/password provided by the instructor..
-
-. From a command prompt, set the API target for the CLI:
++
+. Login to Pivotal Cloud Foundry (sso):
 +
 ----
-$ cf api --skip-ssl-validation https://api.sys.cloud01.ascension.org
-----
-
-. Login to Pivotal Cloud Foundry (username and password):
-+
-----
-$ cf login -u <your username>
+$ cf login -a https://api.sys.cloud02.ascension.org -sso
 ----
 +
 Follow the prompts, choosing default organization and space.
