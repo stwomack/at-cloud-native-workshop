@@ -5,8 +5,6 @@
 . If you haven't already, download the latest release of the PCF CLI for your operating system and install it.
 
 . Use the API target and username/password provided by the instructor..
-
-. From a command prompt, set the API target for the CLI:
 +
 . Login to Pivotal Cloud Foundry (sso):
 +
