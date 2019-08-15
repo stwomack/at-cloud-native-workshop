@@ -5,30 +5,14 @@
 --
 
 --
-== Creating Service Instances for Hello World Spring Cloud Services Demo Application
+== Creating Service Instances for Order Service Spring Cloud Services Demo Application
 > Each of these services takes a few minutes to initialize while creating application instances and other resources to support them. With many students performing the same actions on PCF3 at the same time, please be patient while initialization completes.
 
 . Create the services the demo application depends on, first start with an instance of the config service.
 +
 ----
 cf create-service p.config-server standard config-server -c '{"git": { "uri": "https://github.com/stwomack/womack-configrepo" } }'
-Creating service instance config-server in org student20-org / space development as student20...
-OK
-----
-
-. Now, we need an instance of the service registry service.
-+
-----
-cf create-service p-service-registry standard service-registry
-Creating service instance service-registry in org student20-org / space development as student20...
-OK
-----
-
-. The final service that we need is for the circuit breaker dashboard.
-+
-----
-cf create-service p-circuit-breaker-dashboard standard circuit-breaker
-Creating service instance circuit-breaker in org student20-org / space development as student20...
+Creating service instance config-server in org my-org / space development as student20...
 OK
 ----
 
