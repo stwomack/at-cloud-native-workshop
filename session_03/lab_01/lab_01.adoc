@@ -9,7 +9,7 @@
 . Login to Pivotal Cloud Foundry (sso):
 +
 ----
-$ cf login -a https://api.sys.cloud02.ascension.org -sso
+cf login -a https://api.sys.cloud-02.pcf.ascension.org --sso
 ----
 +
 Follow the prompts, choosing default organization and space.
@@ -123,19 +123,19 @@ public class OrdersServiceApplication {
 . You should still be in the _Orders Service_ application directory:
 +
 ----
-$ cd $COURSE_HOME/session_03/lab_01/orders-service
+cd $COURSE_HOME/session_03/lab_01/orders-service
 ----
 
 . Using Maven, build and package the application (note, windows users will use ./mvnw.bat :
 +
 ----
-$ ./mvnw install
+./mvnw install
 ----
 
 . Push the application!
 +
 ----
-$ cf push
+cf push
 ----
 +
 You should see output similar to the following listing. Take a look at the listing callouts for a play-by-play of what's happening:

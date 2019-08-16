@@ -18,13 +18,13 @@ Use the following information to connect (login) to specific environments as dir
 Using the above information, your step to login are as follows below. When logging in, PCF will ask you for your password and which PCF Space, i.e. development, test, or production, in which you would like to work. Spaces can always be changed later using `cf target -s test`, for instance.
 
 ```
-$ cf login -a <endpoint> -u <user> --skip-ssl-validation
+$ cf login -a <endpoint> -u <user> 
 ```
 
 So for PWS, use your email address from when you created your account.
 
 ```
-$ cf login -a api.run.pivotal.io -u myname@email.com --skip-ssl-validation
+$ cf login -a api.run.pivotal.io -u myname@email.com 
 ...
 ```
 
