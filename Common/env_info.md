@@ -9,9 +9,9 @@
 Use the following information to connect (login) to specific environments as directed by the instructor.
 
 ### Pivotal Web Services (PWS)
-- Website: http://apps.sys.cloud-01.pcf.ascension.org
-- Endpoint: api.sys.cloud-01.pcf.ascension.org
-- Username/Password: ‘Employee ID’ and password (LDAP)
+- Website: https://console.run.pivotal.io/
+- Endpoint: api.run.pivotal.io
+- Username/Password: userid and password
 - Use [PWS Marketplace services](#pws-marketplace-services-and-plans) below
 
 ## Logging into an Environment
