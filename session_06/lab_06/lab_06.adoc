@@ -6,7 +6,7 @@
 
 --
 == Creating Service Instances for Order Service Spring Cloud Services Demo Application
-> Each of these services takes a few minutes to initialize while creating application instances and other resources to support them. With many students performing the same actions on PCF3 at the same time, please be patient while initialization completes.
+> Each of these services takes a few minutes to initialize while creating application instances and other resources to support them. With many users performing the same actions at the same time, please be patient while initialization completes.
 
 . Create the services the demo application depends on, first start with an instance of the config service.
 +
@@ -16,67 +16,61 @@ Creating service instance config-server in org my-org / space development as stu
 OK
 ----
 
-== Build and Push the applications
+== Add the Spring Cloud Config dependency to your project
 
-. Change to the directory that contains hello-ui and hello-server components.
+. Make sure you're back in the _Orders Service_ application directory:
 +
 ----
-$ cd $COURSE_HOME/session_06/lab_06/hello-world
+cd $COURSE_HOME/session_03/lab_01/orders-service
 ----
 
-. Open the manifest.yml file.  Notice the application names and the service bindings.
+. Add the confic client dependency to your pom.yml:
 +
 ----
----
----
-memory: 1GB
-instances: 1
-applications:
-- name: hello-server
-  random-route: true
-  path: hello-server/target/hello-server-0.0.1-SNAPSHOT.jar
-  services:
-  - service-registry
-  - config-server
-- name: hello-ui
-  random-route: true
-  path: hello-ui/target/hello-ui-0.0.1-SNAPSHOT.jar
-  services:
-  - service-registry
-  - config-server
-  - circuit-breaker
+  <dependency>
+      <groupId>io.pivotal.spring.cloud</groupId>
+      <artifactId>spring-cloud-services-starter-config-client</artifactId>
+  </dependency>
 ----
 
-.  Build the applications
+. Create a new endpoint to demonstrate configuration settings, by adding the following class to /src/main/java/com/workshop/OrderServiceApplication.java
++
+----
+	@RefreshScope
+	@RestController
+	class MessageRestController {
+
+		@Value("${message}")
+		private String message;
+
+		@RequestMapping("/message")
+		String getMessage() {
+			System.out.println("Message endpoint called");
+			return this.message;
+		}
+  }
+----
+
+. In src/main/resources/application.properties, add a default message for the boot app to use in the event it cannot fetch a property from the Config Server
++
+----
+message=Default Message
+----
+
+. To validate, your full application.properties file should now look like this:
+
+```
+security.basic.enabled=false
+management.security.enabled=false
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
+message=Default Message
+```
+
+.  Build the application
 +
 ----
 $./mvnw package
-[INFO] Scanning for projects...
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Build Order:
-[INFO]
-[INFO] hello-server
-[INFO] hello-ui
-[INFO] Hello World Cloud Native Demo!
-
-...
-
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Hello World Cloud Native Demo! 0.0.1-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary:
-[INFO]
-[INFO] hello-server ....................................... SUCCESS [  5.342 s]
-[INFO] hello-ui ........................................... SUCCESS [  5.206 s]
-[INFO] Hello World Cloud Native Demo! ..................... SUCCESS [  0.001 s]
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 10.940 s
-[INFO] Finished at: 2015-12-09T00:20:31-05:00
-[INFO] Final Memory: 49M/418M
-[INFO] ------------------------------------------------------------------------
 ----
 .  Push the applications and tell Cloud Foundry not to start the applications quite yet
 +
