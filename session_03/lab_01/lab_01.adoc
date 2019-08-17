@@ -27,6 +27,7 @@ Rest Repositories
 GCP Support
 H2 Database
 Spring Boot Actuator
+Spring Security
 Lombok
 ----
 . Click 'Generate Project', and save the .zip file to this directory $COURSE_HOME/session_03/lab_01 ($COURSE_HOME is a pointer to where you cloned this repo )
@@ -113,6 +114,15 @@ public class OrdersServiceApplication {
                     .forEach(orderNumber -> orderRepository.save(new OrderItem(orderNumber, "Customer1")));
             orderRepository.findAll().forEach(System.out::println);
         };
+    }
+    
+    @Configuration
+    public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/**");
+        }
     }
 }
 ```
