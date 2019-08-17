@@ -89,6 +89,11 @@ cf bind-service orders-service config-server
 ----
 cf start orders-service
 ----
++
+Your route should be something similar to this:
+----
+https://orders-service-delightful-koala.cfapps.io/message
+----
 
 
 
