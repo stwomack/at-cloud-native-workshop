@@ -78,10 +78,4 @@ message=Default Message
 cf push --no-start
 ----
 
-
-
-. Verify that the applications visiting the URL for the hello-ui application and testing it out.
-
-image::/../../Common/images/lab8screenshot4.png[]
-
-link:/README.md#course-materials[Course Materials home] | link:/session_06/lab_07/lab_07.adoc[Lab 7 - Service Registry]
+link:/README.md#course-materials[Course Materials home] | End of SCS Labs
