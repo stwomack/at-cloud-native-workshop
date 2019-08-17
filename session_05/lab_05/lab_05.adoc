@@ -52,7 +52,7 @@ It will add Git branch and commit coordinates to the `/info` endpoint:
 	<groupId>pl.project13.maven</groupId>
 	<artifactId>git-commit-id-plugin</artifactId>
 	<configuration>
-			<dotGitDirectory>../../../../.git</dotGitDirectory>
+	<dotGitDirectory>../../../../.git</dotGitDirectory>
 	</configuration>
 </plugin>
 ----
