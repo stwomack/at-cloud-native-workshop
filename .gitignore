@@ -20,3 +20,6 @@ hs_err_pid*
 *.iml
 .DS_Store
 target/
+session_03/lab_01/orders-service*
+session_03/lab_01/orders-service
+session_03/lab_01/orders-service/
