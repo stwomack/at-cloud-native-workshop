@@ -24,7 +24,7 @@ OK
 cd $COURSE_HOME/session_03/lab_01/orders-service
 ----
 
-. Add the confic client dependency to your pom.yml:
+. Add the config client dependency to your pom.yml:
 +
 ----
   <dependency>
