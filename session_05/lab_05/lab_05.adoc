@@ -81,13 +81,13 @@ These will add the project's Maven coordinates to the `/info` endpoint. The Spri
 . Build the application:
 +
 ----
-$ ./mvnw package
+./mvnw package
 ----
 
 . Run the application:
 +
 ----
-$ java -jar target/hello-spring-boot-0.0.1-SNAPSHOT.jar
+./mvnw spring-boot:run
 ----
 
 . Visit the application in the browser (http://localhost:8080/info), and verify that the output is similar to the following:
@@ -153,13 +153,13 @@ This demo health indicator will randomize the health check.
 . Build the application:
 +
 ----
-$ ././mvnw package
+./mvnw package
 ----
 
 . Run the application:
 +
 ----
-$ java -jar target/hello-spring-boot-0.0.1-SNAPSHOT.jar
+./mvnw spring-boot:run
 ----
 
 . Visit the application in the browser (http://localhost:8080/health), and verify that the output is similar to the following (and changes randomly!):
@@ -237,13 +237,13 @@ public static void main(String[] args) {
 . Build the application:
 +
 ----
-$ ././mvnw package
+./mvnw package
 ----
 
 . Run the application:
 +
 ----
-$ java -jar target/hello-spring-boot-0.0.1-SNAPSHOT.jar
+./mvnw spring-boot:run
 ----
 
 . Visit the application in the browser (http://localhost:8080) and refresh the page several times.
