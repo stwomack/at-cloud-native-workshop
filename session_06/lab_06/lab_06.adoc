@@ -36,19 +36,19 @@ cd $COURSE_HOME/session_03/lab_01/orders-service
 . Create a new endpoint to demonstrate configuration settings, by adding the following class to /src/main/java/com/workshop/OrderServiceApplication.java
 +
 ----
-	@RefreshScope
-	@RestController
-	class MessageRestController {
+@RefreshScope
+@RestController
+class MessageRestController {
 
-		@Value("${message}")
-		private String message;
+	@Value("${message}")
+	private String message;
 
-		@RequestMapping("/message")
-		String getMessage() {
-			System.out.println("Message endpoint called");
-			return this.message;
-		}
-  }
+	@RequestMapping("/message")
+	String getMessage() {
+		System.out.println("Message endpoint called");
+		return this.message;
+	}
+}
 ----
 
 . In src/main/resources/application.properties, add a default message for the boot app to use in the event it cannot fetch a property from the Config Server
