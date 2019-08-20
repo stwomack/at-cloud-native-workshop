@@ -50,6 +50,7 @@ image::/../../Common/images/PWS_Marketplace.png[]
 From the CLI, let's _create_ a developer instance:
 +
 ----
+cf create-service p.mysql db-small
 $ cf create-service google-cloudsql-mysql mysql-db-f1-micro orders-service-db
 Creating service orders-service-db in org Workshop / space user1 as swomack@pivotal.io...
 OK
