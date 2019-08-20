@@ -51,7 +51,6 @@ From the CLI, let's _create_ a developer instance:
 +
 ----
 cf create-service p.mysql db-small
-$ cf create-service google-cloudsql-mysql mysql-db-f1-micro orders-service-db
 Creating service orders-service-db in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
@@ -141,3 +140,5 @@ As you can see, the application is now utilizing a MySQL database via the `order
 We made no code or configuration changes in order to accomplish this. We simply told Cloud Foundry to bind us to this external service, and it did. Spring Connectors take care of wiring up connections to H2, MySql, Other Relational and NoSQL DBs, Message Brokers, etc.
 
 link:/README.md#course-materials[Course Materials home] | link:/session_03/lab_03/lab_03.adoc[Lab 3 - Scaling Applications]
+
+placeholder for gcp: $ cf create-service google-cloudsql-mysql mysql-db-f1-micro orders-service-db
