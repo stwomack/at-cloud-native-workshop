@@ -14,7 +14,7 @@ cf login -a https://api.sys.cloud-02.pcf.ascension.org --sso
 +
 Follow the prompts, choosing default organization and space.
 
-== Crate Application
+== Create Application
 
 . Go to http://start.spring.io/ in your browser
 . Change the 'Group' field to 'com.workshop' .
