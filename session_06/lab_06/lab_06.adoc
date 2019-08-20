@@ -11,7 +11,7 @@
 . Create the services the demo application depends on, first start with an instance of the config service.
 +
 ----
-cf create-service p.config-server standard config-server -c '{"git": { "uri": "https://github.com/stwomack/womack-configrepo" } }'
+cf create-service p.config-server standard config-server 
 Creating service instance config-server in org my-org / space development as student20...
 OK
 ----
