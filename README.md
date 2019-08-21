@@ -67,3 +67,5 @@ In order to perform the labs, you must be connected or logged into a live PCF en
 
 ### _Spring Boot and Actuator_ [(Slides)](session_05/Session_05-Spring_Boot_Actuator-2xpg.pdf)
   - [Lab 5 - Introspection, Monitoring, and Metrics using Spring Boot Actuator](session_05/lab_05/lab_05.adoc)
+  
+### _Spring Cloud Services_  [(Slides)](session_06/Session_06-Spring-Cloud-Services-2xpg.pdf)
