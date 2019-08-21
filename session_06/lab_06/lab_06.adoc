@@ -84,8 +84,10 @@ message=Default Message
 .  Push the applications and tell Cloud Foundry not to start the applications
 +
 ----
-cf push -b java_buildpack --no-start
+cf push -b java_buildpack_offline --no-start
 ----
+
+Note that this time we're adding '-b java_buildpack_offline' in order to speed up the 'detect' phase of the app staging
 
 .  Bind the application to the config server we created at the beginning of this lab
 +
