@@ -50,6 +50,15 @@ class MessageRestController {
 	}
 }
 ----
+ 
+. Hint: If you're not using and IDE that will automatically add imports for you, you'll need to add the following include statements to your class:
++
+----
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+----
 
 . In src/main/resources/application.properties, add a default message for the boot app to use in the event it cannot fetch a property from the Config Server
 +
@@ -95,6 +104,6 @@ Your route should be something similar to this:
 https://orders-service-delightful-koala.cfapps.io/message
 ----
 
-
+And your message should no longer be "Default Message", because the @Value was picked up from the config repo, via the config server.
 
 link:/README.md#course-materials[Course Materials home] | End of SCS Labs
