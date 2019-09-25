@@ -11,12 +11,11 @@ Time | Session
 9:00 AM - 9:15 AM | _Workshop Kickoff And Intros_
 9:15 - 9:45 AM | _Cloud Native Architectures and Frameworks( Microservices, 12Factor Apps )_
 9:45 PM- 10:00 PM | _Break_
-10:00 - 10:45 AM | _PCF & Isidore Overview and Onboarding_ 
-10:45 AM - 12:00 PM | _Developer Workshop (*LABS*)_
+10:00 AM - 12:00 PM | _Developer Workshop (*LABS*)_
 12:00 PM - 1:00 PM | _Lunch_
-1:00 PM - 1:15 PM | _Spring Boot Overview_
-1:15 PM - 2:00 PM | _Developer Workshop (Continued)_
-2:00 PM - 2:30 PM | _Wrap-up, Q&A_
+1:00 PM - 1:30 PM | _Spring Boot Overview_
+1:30 PM - 2:30 PM | _Developer Workshop (*LABS* Continued)_
+2:30 PM - 3:00 PM | _Wrap-up, Q&A_
 
 _*See [Labs Materials](#labs-materials) section below for slides and labs_
 
