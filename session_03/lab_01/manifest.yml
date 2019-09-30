@@ -1,6 +1,6 @@
 ---
 applications:
-- name: orders-service
+- name: orders-service-${initials}
   memory: 768M
   instances: 1
   random-route: true
