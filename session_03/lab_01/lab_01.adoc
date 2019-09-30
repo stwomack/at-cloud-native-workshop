@@ -35,6 +35,7 @@ Lombok
 . Unzip the project
 . Delete the .zip file
 . Copy ( or move ) the manifest.yml file from this directory into the newly extracted project directory
+. ```- name: orders-service-${initials}``` should be changed to reflect your actual initials. Otherwise everyone will clash
 . For the following steps, use your favorite IDE or file editor
 . Add the following properties to the file src/main/resources/application.properties
 +
