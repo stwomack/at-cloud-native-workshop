@@ -48,17 +48,18 @@ image::/../../Common/images/PWS_Marketplace.png[]
 
 . Let's begin by creating a MySQL instance using the MySQL Database service broker.
 From the CLI, let's _create_ a developer instance:
+. Keep in mind that ${initials} should be replaced with your actual intials to avoid conflicts with others
 +
 ----
-cf create-service p.mysql db-small orders-service-db
+cf create-service p.mysql db-small orders-service-db-${initials}
 Creating service orders-service-db in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 
-. Next we'll _bind_ the newly created instance to our `orders-service` application:
+. Next we'll _bind_ the newly created instance to our `orders-service` application
 +
 ----
-$ cf bind-service orders-service orders-service-db
+$ cf bind-service orders-service orders-service-db-${initials}
 Binding service orders-service-db to app orders-service in org oreilly-class / space instructor as swomack@pivotal.io...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
