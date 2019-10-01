@@ -61,10 +61,11 @@ In order to perform the labs, you must be connected or logged into a live PCF en
   - [Lab 4 - Monitoring Applications](session_03/lab_04/lab_04.adoc)
 
 ### _Lunch:_
-
-### _Cloud Native Platforms_ [(Slides)](session_04/Session_04-Cloud_Native_Platforms.pdf)
+  
+### SKIP - Already Complete _Cloud Native Platforms_ [(Slides)](session_04/Session_04-Cloud_Native_Platforms.pdf)
 
 ### _Spring Boot and Actuator_ [(Slides)](session_05/Session_05-Spring_Boot_Actuator-2xpg.pdf)
   - [Lab 5 - Introspection, Monitoring, and Metrics using Spring Boot Actuator](session_05/lab_05/lab_05.adoc)
   
 ### _Spring Cloud Services_  [(Slides)](session_06/Session_06-Spring-Cloud-Services-2xpg.pdf)
+  - [Lab 6 - Spring Cloud Config Server](session_06/lab_06/lab_06.adoc)
