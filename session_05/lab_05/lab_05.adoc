@@ -165,12 +165,14 @@ This demo health indicator will randomize the health check.
 
 == Metrics
 
-Spring Boot provides an endpoint (http://localhost:8080/metrics) that exposes several automatically collected metrics for your application.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/metrics) that exposes several automatically collected metrics for your application.
 It also allows for the creation of custom metrics.
 
 . Create the class `io.pivotal.spring.hello.GreetingService` and into it paste the following code:
 +
 ----
+package io.pivotal.spring.hello;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.metrics.CounterService;
