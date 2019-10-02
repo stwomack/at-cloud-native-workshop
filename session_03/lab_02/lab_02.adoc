@@ -59,7 +59,7 @@ OK
 . Next we'll _bind_ the newly created instance to our `orders-service` application
 +
 ----
-$ cf bind-service orders-service orders-service-db-${initials}
+$ cf bind-service orders-service-${initials} orders-service-db-${initials}
 Binding service orders-service-db to app orders-service in org oreilly-class / space instructor as swomack@pivotal.io...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
@@ -69,7 +69,7 @@ TIP: Use 'cf restage' to ensure your env variable changes take effect
 Let's take a look at the environment variables for our application to see what's been done. We can do this by typing:
 +
 ----
-$ cf env orders-service
+$ cf env orders-service-${initials}
 ----
 +
 The subset of the output we're interested in is located near the very top, titled `System-Provided`:
@@ -124,17 +124,14 @@ System-Provided:
 A _restage_ is generally recommended because Cloud Foundry buildpacks also have access to injected environment variables and can install or configure things differently based on their values.]
 +
 ----
-$ cf restage orders-service
+$ cf restage orders-service-${initials}
 ----
 +
-Once the application is running again, revisit or refresh the /health actuator endpoint in the browser tab where you have the _Orders Service_ application loaded:
+Once the application is running again, revisit or refresh the `/actuator/health` actuator endpoint in the browser tab where you have the _Orders Service_ application loaded:
 +
 ```
-"db": {
-"status": "UP",
-"database": "MySQL",
-"hello": 1
-}
+{"status":"UP","details":{"diskSpace":{"status":"UP","details":{"total":1073741824,"free":904355840,"threshold":10485760}},
+"db":{"status":"UP","details":{"database":"MySQL","hello":1}}}}
 ```
 +
 As you can see, the application is now utilizing a MySQL database via the `orders-service-db` service.
