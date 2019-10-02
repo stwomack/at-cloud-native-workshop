@@ -14,7 +14,8 @@ It also reduces the number of causes that must be considered when problems arise
 All application configuration changes are recorded as _events_.
 These events can be viewed via the Cloud Foundry API, and viewing is facilitated via the CLI.
 
-Take a look at the events that have transpired so far for our deployment of `orders-service-${initials}`:
+. Take a look at the events that have transpired so far for our deployment of `orders-service-${initials}`:
++
 
 ====
 ----
