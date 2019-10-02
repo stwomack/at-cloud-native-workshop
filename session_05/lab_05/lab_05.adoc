@@ -173,47 +173,80 @@ It also allows for the creation of custom metrics.
 ----
 package io.pivotal.spring.hello;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter.Type;
+import io.micrometer.core.instrument.MeterRegistry;
+
 
 @Component
 public class GreetingService {
 
-    @Autowired
-    CounterService counterService;
-
     @Value("${greeting}")
     String greeting;
 
-    public String getGreeting() {
-        counterService.increment("counter.services.greeting.invoked");
+	@Bean
+	MeterRegistryCustomizer<MeterRegistry> addCounterRegistry() {
+	    return registry -> registry.config().namingConvention().name("counter.services.greeting.invoked", Type.COUNTER);
+	}
+	
+	private final Counter greetingCounter;
+	
+	public GreetingService(MeterRegistry registry) {       
+        this.greetingCounter = registry.counter("counter.services.greeting.invoked");
+    }
+	
+	public String getGreeting() {
+		this.greetingCounter.increment();
         return greeting;
     }
+	
 }
 ----
 +
-This class is using the `@Autowired` `CounterService` to count the number of times that the `getGreeting()` method has been invoked.
+This class is using Micrometer, which is now integrated into Spring Boot 2.x. This service counts the number of times that the `getGreeting()` method has been invoked.
 
 . Refactor the contents of the class `io.spring.hello.HelloSpringBootApplication`:
 +
 ----
-// imports
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Value;
+package io.pivotal.spring.hello;
 
-// contents of class HelloSpringBootApplication
-@Autowired
-private GreetingService greetingService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
-@RequestMapping("/")
-public String hello() {
-    return String.format("%s World!", greetingService.getGreeting());
-}
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter.Type;
+import io.micrometer.core.instrument.MeterRegistry;
 
-public static void main(String[] args) {
-    SpringApplication.run(HelloSpringBootApplication.class, args);
+
+@Component
+public class GreetingService {
+
+    @Value("${greeting}")
+    String greeting;
+
+	@Bean
+	MeterRegistryCustomizer<MeterRegistry> addCounterRegistry() {
+	    return registry -> registry.config().namingConvention().name("counter.services.greeting.invoked", Type.COUNTER);
+	}
+	
+	private final Counter greetingCounter;
+	
+	public GreetingService(MeterRegistry registry) {       
+        this.greetingCounter = registry.counter("counter.services.greeting.invoked");
+    }
+	
+	public String getGreeting() {
+		this.greetingCounter.increment();
+        return greeting;
+    }
+	
 }
 ----
 +
