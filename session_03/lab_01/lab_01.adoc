@@ -45,6 +45,7 @@ management.security.enabled=false
 spring.jpa.hibernate.ddl-auto=create
 spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
 management.endpoint.health.show-details=always
+management.endpoints.web.exposure.include=*
 ```
 . Create a class, `OrderItem.java`, in `src/main/java/com/workshop/ordersservice`, and paste in the following contents:
 +
