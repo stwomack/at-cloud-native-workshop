@@ -127,7 +127,9 @@ A _restage_ is generally recommended because Cloud Foundry buildpacks also have 
 $ cf restage orders-service-${initials}
 ----
 +
-Once the application is running again, revisit or refresh the `/actuator/health` actuator endpoint in the browser tab where you have the _Orders Service_ application loaded:
+. View the /orderItems endpoint of your application to see what has already been added in the database
++
+. Once the application is running again, revisit or refresh the `/actuator/health` actuator endpoint in the browser tab where you have the _Orders Service_ application loaded:
 +
 ```
 {"status":"UP","details":{"diskSpace":{"status":"UP","details":{"total":1073741824,"free":904355840,"threshold":10485760}},
