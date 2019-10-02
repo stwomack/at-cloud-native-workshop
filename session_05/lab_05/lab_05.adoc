@@ -30,22 +30,21 @@ cd $COURSE_HOME/session_05/lab_05/initial/hello-spring-boot
 
 . Try out the following endpoints. The output is omitted here because it can be quite large:
 +
-http://localhost:8080/beans:: Dumps all of the beans in the Spring context.
-http://localhost:8080/autoconfig:: Dumps all of the auto-configuration performed as part of application bootstrapping.
-http://localhost:8080/configprops:: Displays a collated list of all `@ConfigurationProperties`.
-http://localhost:8080/env:: Dumps the application's shell environment as well as all Java system properties.
-http://localhost:8080/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
-http://localhost:8080/dump:: Performs a thread dump.
-http://localhost:8080/trace:: Displays trace information (by default the last few HTTP requests).
+http://localhost:8080/actuator/beans:: Dumps all of the beans in the Spring context.
+http://localhost:8080/actuator/configprops:: Displays a collated list of all `@ConfigurationProperties`.
+http://localhost:8080/actuator/env:: Dumps the application's shell environment as well as all Java system properties.
+http://localhost:8080/actuator/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
+http://localhost:8080/actuator/threaddump:: Performs a thread dump.
+http://localhost:8080/actuator/httptrace:: Displays trace information (by default the last few HTTP requests).
 
 == Build and Version Control Info
 
-Spring Boot provides an endpoint (http://localhost:8080/info) that allows the exposure of arbitrary metadata.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/info) that allows the exposure of arbitrary metadata.
 
 One thing that it does well is expose information about the specific build and version control coordinates for a given deployment.
 
 . Add the following plugin to your Maven build.
-It will add Git branch and commit coordinates to the `/info` endpoint:
+It will add Git branch and commit coordinates to the `/actuator/info` endpoint:
 +
 ----
 <plugin>
@@ -70,7 +69,7 @@ info:
     version: '@project.version@'
 ----
 +
-These will add the project's Maven coordinates to the `/info` endpoint. The Spring Boot Maven plugin will cause them to automatically be replaced in the assembled JAR.
+These will add the project's Maven coordinates to the `/actuator/info` endpoint. The Spring Boot Maven plugin will cause them to automatically be replaced in the assembled JAR.
 
 . Run the application:
 +
@@ -78,7 +77,7 @@ These will add the project's Maven coordinates to the `/info` endpoint. The Spri
 ./mvnw spring-boot:run
 ----
 
-. Visit the application in the browser (http://localhost:8080/info), and verify that the output is similar to the following:
+. Visit the application in the browser (http://localhost:8080/actuator/info), and verify that the output is similar to the following:
 +
 ----
 {
@@ -100,7 +99,7 @@ These will add the project's Maven coordinates to the `/info` endpoint. The Spri
 
 == Health Indicators
 
-Spring Boot provides an endpoint (http://localhost:8080/health) that allows for the notion of various health indicators.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/health) that allows for the notion of various health indicators.
 
 . Normally, when Spring Security is not enabled, the `/health` endpoint will only expose an `UP` or `DOWN` value.
 To simplify working with the endpoint for this lab, we will turn off its sensitivity.
@@ -114,6 +113,8 @@ endpoints:
 . Create the class `io.pivotal.spring.hello.FlappingHealthIndicator` and into it paste the following code:
 +
 ----
+package io.pivotal.spring.hello;
+
 import java.util.Random;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -144,7 +145,7 @@ This demo health indicator will randomize the health check.
 ./mvnw spring-boot:run
 ----
 
-. Visit the application in the browser (http://localhost:8080/health), and verify that the output is similar to the following (and changes randomly!):
+. Visit the application in the browser (http://localhost:8080/actuator/health), and verify that the output is similar to the following (and changes randomly!):
 +
 ----
 {
