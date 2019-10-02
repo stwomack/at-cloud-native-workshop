@@ -31,13 +31,13 @@ Spring Boot Actuator
 Spring Security
 Lombok
 ----
-. Click 'Generate Project', and save the .zip file to this directory $COURSE_HOME/session_03/lab_01 ($COURSE_HOME is a pointer to where you cloned this repo )
+. Click 'Generate Project', and save the .zip file to this directory `$COURSE_HOME/session_03/lab_01` ($COURSE_HOME is a pointer to where you cloned this repo )
 . Unzip the project
 . Delete the .zip file
-. Copy ( or move ) the manifest.yml file from this directory into the newly extracted project directory
+. Copy ( or move ) the `manifest.yml` file from this directory into the newly extracted project directory
 . ```- name: orders-service-${initials}``` should be changed to reflect your actual initials. Otherwise everyone will clash
 . For the following steps, use your favorite IDE or file editor
-. Add the following properties to the file src/main/resources/application.properties
+. Add the following properties to the file `src/main/resources/application.properties`
 +
 ```
 security.basic.enabled=false
@@ -46,7 +46,7 @@ spring.jpa.hibernate.ddl-auto=create
 spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
 management.endpoint.health.show-details=always
 ```
-. Create a class, OrderItem.java, in src/main/java/com/workshop , and paste in the following contents:
+. Create a class, `OrderItem.java`, in `src/main/java/com/workshop/ordersservice`, and paste in the following contents:
 +
 ```
 package com.workshop.ordersservice;
@@ -78,7 +78,7 @@ public class OrderItem {
 ```
 +
 Note that project Lombok takes care of boilerplate code like getters & setters
-. Finally, replace the contents of /src/main/java/com/workshop/OrderServiceApplication.java with the following
+. Finally, replace the contents of `/src/main/java/com/workshop/OrderServiceApplication.java` with the following
 ```
 package com.workshop.ordersservice;
 
@@ -87,7 +87,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.PagingAndSortingRepository;
