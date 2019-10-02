@@ -279,11 +279,7 @@ In the example `cf push` above, the `urls:` section of the application health re
 
 Because our application knows nothing about any backing databases, and h2 is on the classpath, h2's in memory database will be used when this application starts up. Look at the /actuator/health actuator endpoint of your application to see that there's no backing database reported. In the next lab, we'll bind a backing database
 ```
-"db": {
-"status": "UP",
-"database": "H2",
-"hello": 1
-}
+{"status":"UP","details":{"diskSpace":{"status":"UP","details":{"total":1073741824,"free":904355840,"threshold":10485760}},"db":{"status":"UP","details":{"database":"H2","hello":1}}}}
 ```
 
 
