@@ -30,13 +30,12 @@ cd $COURSE_HOME/session_05/lab_05/initial/hello-spring-boot
 
 . Try out the following endpoints. The output is omitted here because it can be quite large:
 +
-http://localhost:8080/beans:: Dumps all of the beans in the Spring context.
-http://localhost:8080/autoconfig:: Dumps all of the auto-configuration performed as part of application bootstrapping.
-http://localhost:8080/configprops:: Displays a collated list of all `@ConfigurationProperties`.
-http://localhost:8080/env:: Dumps the application's shell environment as well as all Java system properties.
-http://localhost:8080/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
-http://localhost:8080/dump:: Performs a thread dump.
-http://localhost:8080/trace:: Displays trace information (by default the last few HTTP requests).
+http://localhost:8080/actuator/beans:: Dumps all of the beans in the Spring context.
+http://localhost:8080/actuator/configprops:: Displays a collated list of all `@ConfigurationProperties`.
+http://localhost:8080/actuator/env:: Dumps the application's shell environment as well as all Java system properties.
+http://localhost:8080/actuator/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
+http://localhost:8080/actuator/threaddump:: Performs a thread dump.
+http://localhost:8080/actuator/httptrace:: Displays trace information (by default the last few HTTP requests).
 
 == Build and Version Control Info
 
