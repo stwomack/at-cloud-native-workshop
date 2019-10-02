@@ -4,10 +4,10 @@ Cloud Foundry makes the work of horizontally scaling application instances and u
 
 == Scale the Application Up
 
-. Now let's increase the number of running application instances to 5:
+. Now let's increase the number of running application instances to 3:
 +
 ----
-$ cf scale -i 5 orders-service-${initial}
+$ cf scale -i 3 orders-service-${initial}
 Scaling app orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
@@ -23,8 +23,8 @@ Showing health and status for app orders-service-${initial} in org Workshop / sp
 OK
 
 requested state: started
-instances: 5/5
-usage: 512M x 5 instances
+instances: 3/3
+usage: 512M x 3 instances
 urls: orders-service-${initial}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
@@ -47,8 +47,8 @@ Showing health and status for app orders-service-${initial} in org Workshop / sp
 OK
 
 requested state: started
-instances: 5/5
-usage: 512M x 5 instances
+instances: 3/3
+usage: 512M x 3 instances
 urls: orders-service-${initial}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
