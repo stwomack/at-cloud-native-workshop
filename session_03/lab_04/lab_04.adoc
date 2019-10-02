@@ -168,61 +168,6 @@ $ cf logs orders-service-${initials}
 +
 You can try various things like refreshing the browser and triggering stop/start events to see logs being generated. Stop `cf logs <app_name>` output by pressing Ctrl-C.
 
-=== (SKIP for today's workshop. Consider doing these steps later) For Operators 
-
-Application operators will also enjoy commands like `cf logs`, but are often interested in long-term retention, indexing, and analysis of logs as well.
-Cloud Foundry currently only provides short-term retention of logs.
-To meet these needs, Cloud Foundry provides the ability to http://docs.cloudfoundry.org/devguide/services/log-management.html[drain logs to third-party providers.]
-
-In this section, we'll drain logs to a very simple provider called https://papertrailapp.com[Papertrail].
-
-. Visit https://papertrailapp.com and create a free account.
-
-. Login to your account and add your first system:
-+
-image::../../Common/images/papertrail_1.png[]
-
-. Click on ``Alternatives'':
-+
-image::../../Common/images/papertrail_2.png[]
-
-. Choose ``I use Heroku'' and provide a name:
-+
-image::../../Common/images/papertrail_3.png[]
-
-. Note the URL + Port assigned to your application:
-+
-image::../../Common/images/papertrail_4.png[]
-
-. We'll use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail:
-+
-----
-$ cf cups orders-service-${initials}-logs -l syslog://logs2.papertrailapp.com:43882
-Creating user provided service orders-service-${initials}-logs in org Workshop / space user1 as swomack@pivotal.io...
-OK
-----
-
-. We bind that service instance like those we created in link:../lab_02/lab_02.adoc[Lab 2] (`cf bs` is short for `cf bind-service`):
-+
-----
-$ cf bs orders-service-${initials} orders-service-${initials}-logs
-Binding service orders-service-${initials}-logs to app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
-OK
-TIP: Use 'cf restage' to ensure your env variable changes take effect
-----
-
-. We'll use a `cf restart` rather than `cf restage` to make the binding take effect:
-+
-----
-$ cf restart orders-service-${initials}
-----
-
-. Refresh the Papertrail browser tab to see log events immediately flowing to the log viewing page:
-+
-image::../../Common/images/papertrail_5.png[]
-
-You can see how to connect to other third-party log management systems in the http://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[Cloud Foundry documentation].
-
 == Health
 
 Cloud Foundry's http://docs.cloudfoundry.org/concepts/architecture/#hm9k[Health Manager] actively monitors the health of our application processes and will restart them should they crash. 
@@ -293,6 +238,61 @@ time                          event                 actor               descript
 . Revisiting the *HOME PAGE* of the application (don't simply refresh the browser as you're still on the `/killSwitch` endpoint and you'll just kill the application again!) and you should see a fresh instance started:
 +
 image::../../Common/images/cf-scale-boot-healed.png[]
+
+=== (SKIP for today's workshop. Consider doing these steps later) For Operators 
+
+Application operators will also enjoy commands like `cf logs`, but are often interested in long-term retention, indexing, and analysis of logs as well.
+Cloud Foundry currently only provides short-term retention of logs.
+To meet these needs, Cloud Foundry provides the ability to http://docs.cloudfoundry.org/devguide/services/log-management.html[drain logs to third-party providers.]
+
+In this section, we'll drain logs to a very simple provider called https://papertrailapp.com[Papertrail].
+
+. Visit https://papertrailapp.com and create a free account.
+
+. Login to your account and add your first system:
++
+image::../../Common/images/papertrail_1.png[]
+
+. Click on ``Alternatives'':
++
+image::../../Common/images/papertrail_2.png[]
+
+. Choose ``I use Heroku'' and provide a name:
++
+image::../../Common/images/papertrail_3.png[]
+
+. Note the URL + Port assigned to your application:
++
+image::../../Common/images/papertrail_4.png[]
+
+. We'll use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail:
++
+----
+$ cf cups orders-service-${initials}-logs -l syslog://logs2.papertrailapp.com:43882
+Creating user provided service orders-service-${initials}-logs in org Workshop / space user1 as swomack@pivotal.io...
+OK
+----
+
+. We bind that service instance like those we created in link:../lab_02/lab_02.adoc[Lab 2] (`cf bs` is short for `cf bind-service`):
++
+----
+$ cf bs orders-service-${initials} orders-service-${initials}-logs
+Binding service orders-service-${initials}-logs to app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
+OK
+TIP: Use 'cf restage' to ensure your env variable changes take effect
+----
+
+. We'll use a `cf restart` rather than `cf restage` to make the binding take effect:
++
+----
+$ cf restart orders-service-${initials}
+----
+
+. Refresh the Papertrail browser tab to see log events immediately flowing to the log viewing page:
++
+image::../../Common/images/papertrail_5.png[]
+
+You can see how to connect to other third-party log management systems in the http://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html[Cloud Foundry documentation].
 
 == Clean Up
 
