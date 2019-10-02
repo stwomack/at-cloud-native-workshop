@@ -170,41 +170,36 @@ You can try various things like refreshing the browser and triggering stop/start
 
 == Health
 
-Cloud Foundry's http://docs.cloudfoundry.org/concepts/architecture/#hm9k[Health Manager] actively monitors the health of our application processes and will restart them should they crash. 
+Cloud Foundry https://docs.pivotal.io/platform/2-7/concepts/maintaining-high-availability.html[actively monitors the health of our application processes] and will restart them should they crash. 
 
 > In this lab, you may want to have two terminal windows open to watch `cf logs` while reviewing `cf events`.
 
-. If you don't have one already running, start a log tail for `orders-service-${initials}`:
+. If you don't have a terminal window already running, start a log tail for `orders-service-${initials}`:
 +
 ----
 $ cf logs orders-service-${initials}
 ----
 
-. Visit the application in the browser, and click on the ``Kill Switch'' button. This button will trigger a JVM exit with an error code (`System.exit(1)`), causing the Health Manager to observe an application instance crash:
+. Let's stop the 3rd application instance of your app. See how Cloud Foundry automatically creates another app instance to match my desired capacity
 +
-image::../../Common/images/cf-scale-boot-kill.png[]
+----
+$ cf restart-app-instance orders-service-${initials} 2
+----
++
 
-. After clicking the kill switch a couple of interesting things should happen.
-First, you'll see an error code returned in the browser, as the request you submitted never returns a response:
-+
-image::../../Common/images/bad_gateway.png[]
-+
-Also, if you're paying attention to the log tail, you'll see some interesting log messages fly by:
+. Look at the application log now, you'll see some interesting log messages fly by:
 +
 ====
 ----
-2015-02-13T17:17:54.86-0600 [App/0]      OUT 2015-02-13 23:17:54.860 ERROR 36 --- [io-61617-exec-5] WebApplication                           : KILL SWITCH ACTIVATED! <1>
-2015-02-13T17:17:54.86-0600 [App/0]      OUT 2015-02-13 23:17:54.869  INFO 36 --- [       Thread-2] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.c$ntext.embedded.AnnotationConfigEmbeddedWebApplicationContext@6a62811d: startup date [Fri Feb 13 22:57:05 UTC 2015]; root of context hierarchy
-2015-02-13T17:17:54.87-0600 [App/0]      OUT 2015-02-13 23:17:54.870  INFO 36 --- [       Thread-2] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
-2015-02-13T17:17:54.87-0600 [App/0]      OUT 2015-02-13 23:17:54.874  INFO 36 --- [       Thread-2] o.s.b.a.e.jmx.EndpointMBeanExporter      : Unregistering JMX-exposed beans on shutdown
-2015-02-13T17:17:54.87-0600 [App/0]      OUT 2015-02-13 23:17:54.878  INFO 36 --- [       Thread-2] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
-2015-02-13T17:17:57.30-0600 [RTR/1]      OUT cf-scale-boot-stockinged-rust.cfapps.io - [13/02/2015:23:17:54 +0000] "GET /killSwitch HTTP/1.1" 502 0 "http://cf-scale-boot-stockinged-rust.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36" 10.10.2.122:25194 x_forwarded_for:"50.157.39.197" vcap_request_id:fc2b93a9-451d-460f-726e-14ada0069ff4 response_time:2.465784807 app_id:7a428901-1691-4cce-b7f6-62d186c5cb55 <2>
-2015-02-13T17:17:57.31-0600 [App/0]      ERR
-2015-02-13T17:17:57.38-0600 [API/2]      OUT App instance exited with guid 7a428901-1691-4cce-b7f6-62d186c5cb55 payload: {"cc_partition"=>"default", "droplet"=>"7a428901-1691-4cce-b7f6-62d186c5cb55", "version"=>"ebcdb262-2851-4716-83a4-c816fa2c68bb", "instance"=>"1eecfb8d3b41492a8e36237b365a4755", "index"=>0, "reason"=>"CRASHED", "exit_status"=>1, "exit_description"=>"app instance exited", "crash_timestamp"=>1423869477} <3>
+2019-10-01T22:18:29.13-0500 [CELL/3] OUT Cell 9aa90abe-6a8f-4485-90d1-71da907de9a3 stopping instance 36a34607-b500-461d-6330-d1fb
+   2019-10-01T22:18:34.51-0500 [CELL/SSHD/3] OUT Exit status 0
+   2019-10-01T22:18:34.51-0500 [APP/PROC/WEB/3] OUT 2019-10-02 03:18:34.511  INFO 17 --- [       Thread-9] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+   2019-10-01T22:18:34.51-0500 [APP/PROC/WEB/3] OUT 2019-10-02 03:18:34.514  INFO 17 --- [       Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+   2019-10-01T22:18:35.04-0500 [APP/PROC/WEB/3] OUT Exit status 143
+   2019-10-01T22:18:35.06-0500 [CELL/3] OUT Cell 9aa90abe-6a8f-4485-90d1-71da907de9a3 destroying container for instance 36a34607-b500-461d-6330-d1fb
+   2019-10-01T22:18:35.37-0500 [PROXY/3] OUT Exit status 137
+   2019-10-01T22:18:35.97-0500 [CELL/3] OUT Cell 9aa90abe-6a8f-4485-90d1-71da907de9a3 successfully destroyed container for instance 36a34607-b500-461d-6330-d1fb
 ----
-<1> Just before issuing the `System.exit(1)` call, the application logs that the kill switch was clicked.
-<2> The (Go)Router logs the 502 error.
-<3> The API logs that an application instance exited due to a crash.
 ====
 
 . Check the application events to see another indicator of the crash. Do this in another terminal window or exit `cf logs` by pressing Ctrl-C:
@@ -221,25 +216,26 @@ time                          event                 actor               descript
 +
 ====
 ----
-2015-02-13T17:18:14.67-0600 [CELL/19]     OUT Starting app instance (index 0) with guid 7a428901-1691-4cce-b7f6-62d186c5cb55 <1>
-2015-02-13T17:18:24.72-0600 [App/0]      OUT Resolving dependencies.... <2>
-2015-02-13T17:18:26.62-0600 [App/0]      OUT   .   ____          _            __ _ _
-2015-02-13T17:18:26.62-0600 [App/0]      OUT  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-2015-02-13T17:18:26.62-0600 [App/0]      OUT ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-2015-02-13T17:18:26.62-0600 [App/0]      OUT  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-2015-02-13T17:18:26.62-0600 [App/0]      OUT   '  |____| .__|_| |_|_| |_\__, | / / / /
-2015-02-13T17:18:26.62-0600 [App/0]      OUT  =========|_|==============|___/=/_/_/_/
-2015-02-13T17:18:26.62-0600 [App/0]      OUT  :: Spring Boot ::        (v1.1.9.RELEASE)
+   2019-10-01T22:19:01.44-0500 [CELL/3] OUT Cell 2e2fbcce-0d89-4f32-8458-be88c37d4533 creating container for instance 851b3251-df69-4c7a-4d03-341c
+   2019-10-01T22:19:02.45-0500 [CELL/3] OUT Cell 2e2fbcce-0d89-4f32-8458-be88c37d4533 successfully created container for instance 851b3251-df69-4c7a-4d03-341c
+   2019-10-01T22:19:02.65-0500 [CELL/3] OUT Downloading droplet...
+   2019-10-01T22:19:06.62-0500 [CELL/3] OUT Downloaded droplet (89.5M)
+   2019-10-01T22:19:06.62-0500 [CELL/3] OUT Starting health monitoring of container
+   2019-10-01T22:19:07.73-0500 [APP/PROC/WEB/3] OUT JVM Memory Configuration: -Xmx145122K -Xss1M -XX:ReservedCodeCacheSize=240M -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=129309K
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT   .   ____          _            __ _ _
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT   '  |____| .__|_| |_|_| |_\__, | / / / /
+   2019-10-01T22:19:11.87-0500 [APP/PROC/WEB/3] OUT  =========|_|==============|___/=/_/_/_/
+   2019-10-01T22:19:11.88-0500 [APP/PROC/WEB/3] OUT  :: Spring Boot ::        (v2.1.8.RELEASE)
 ----
-<1> The CELL indicates that it is starting another instance of the application as a result of the Health Manager observing a difference between the desired and actual state (i.e. running instances = 1 vs. running instances = 0).
-<2> The new application instance starts logging events as it starts up.
+The CELL indicates that it is starting another instance of the application as a result of the Diego sub-system observing a difference between the desired and actual state (i.e. running instances = 1 vs. running instances = 0).
+
+The new application instance starts logging events as it starts up.
 ====
 
-. Revisiting the *HOME PAGE* of the application (don't simply refresh the browser as you're still on the `/killSwitch` endpoint and you'll just kill the application again!) and you should see a fresh instance started:
-+
-image::../../Common/images/cf-scale-boot-healed.png[]
-
-=== (SKIP for today's workshop. Consider doing these steps later) For Operators 
+= (SKIP for today's workshop. Consider doing these steps later) For Operators 
 
 Application operators will also enjoy commands like `cf logs`, but are often interested in long-term retention, indexing, and analysis of logs as well.
 Cloud Foundry currently only provides short-term retention of logs.
