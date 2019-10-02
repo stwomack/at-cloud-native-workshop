@@ -14,16 +14,16 @@ It also reduces the number of causes that must be considered when problems arise
 All application configuration changes are recorded as _events_.
 These events can be viewed via the Cloud Foundry API, and viewing is facilitated via the CLI.
 
-Take a look at the events that have transpired so far for our deployment of `cf-scale-boot`:
+Take a look at the events that have transpired so far for our deployment of `orders-service-${initials}`:
 
 ====
 ----
-$ cf events cf-scale-boot
-Getting events for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf events orders-service-${initials}
+Getting events for app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 
 time                          event                 actor               description
 2015-02-13T15:18:33.00-0600   audit.app.update      swomack@pivotal.io   instances: 1 <6>
-2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 5 <5>
+2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 3 <5>
 2015-02-13T12:56:35.00-0600   audit.app.update      swomack@pivotal.io   state: STARTED <4>
 2015-02-13T12:56:26.00-0600   audit.app.update      swomack@pivotal.io <3>
 2015-02-13T12:56:26.00-0600   audit.app.map-route   swomack@pivotal.io <2>
@@ -34,28 +34,28 @@ Here we see the `app.create` event, which created our application's record and s
 <2> The `app.map-route` event records the incoming request to assign a route to our application.
 <3> This `app.update` event records the resulting change to our applications metadata.
 <4> This `app.update` event records the change of our application's state to `STARTED`.
-<5> Remember scaling the application up? This `app.update` event records the metadata change `instances: 5`.
+<5> Remember scaling the application up? This `app.update` event records the metadata change `instances: 3`.
 <6> And here's the `app.update` event recording our scaling of the application back down with `instances: 1`.
 ====
 
 . Let's explicitly ask for the application to be stopped:
 +
 ----
-$ cf stop cf-scale-boot
-Stopping app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf stop orders-service-${initials}
+Stopping app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 
 . Now, examine the additional `app.update` event:
 +
 ----
-$ cf events cf-scale-boot
-Getting events for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf events orders-service-${initials}
+Getting events for app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 
 time                          event                 actor               description
 2015-02-13T15:59:10.00-0600   audit.app.update      swomack@pivotal.io   state: STOPPED
 2015-02-13T15:18:33.00-0600   audit.app.update      swomack@pivotal.io   instances: 1
-2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 5
+2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 3
 2015-02-13T12:56:35.00-0600   audit.app.update      swomack@pivotal.io   state: STARTED
 2015-02-13T12:56:26.00-0600   audit.app.update      swomack@pivotal.io
 2015-02-13T12:56:26.00-0600   audit.app.map-route   swomack@pivotal.io
@@ -65,7 +65,7 @@ time                          event                 actor               descript
 . Start the application again:
 +
 ----
-$ cf start cf-scale-boot
+$ cf start orders-service-${initials}
 Starting app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
 
 0 of 1 instances running, 1 starting
@@ -79,15 +79,15 @@ App started
 
 OK
 
-App cf-scale-boot was started using this command `JAVA_HOME=$PWD/.java-buildpack/open_jdk_jre JAVA_OPTS="-Djava.io.tmpdir=$TMPDIR -XX:OnOutOfMemoryError=$PWD/.java-buildpack/open_jdk_jre/bin/killjava.sh -Xmx382293K -Xms382293K -XX:MaxMetaspaceSize=64M -XX:MetaspaceSize=64M -Xss995K" SERVER_PORT=$PORT $PWD/.java-buildpack/spring_boot_cli/bin/spring run app.groovy`
+App orders-service-${initials} was started using this command `JAVA_HOME=$PWD/.java-buildpack/open_jdk_jre JAVA_OPTS="-Djava.io.tmpdir=$TMPDIR -XX:OnOutOfMemoryError=$PWD/.java-buildpack/open_jdk_jre/bin/killjava.sh -Xmx382293K -Xms382293K -XX:MaxMetaspaceSize=64M -XX:MetaspaceSize=64M -Xss995K" SERVER_PORT=$PORT $PWD/.java-buildpack/spring_boot_cli/bin/spring run app.groovy`
 
-Showing health and status for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+Showing health and status for app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 
 requested state: started
 instances: 1/1
 usage: 512M x 1 instances
-urls: cf-scale-boot-stockinged-rust.cfapps.io
+urls: orders-service-${initials}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
      state     since                    cpu    memory           disk
@@ -97,14 +97,14 @@ last uploaded: Fri Feb 13 18:56:29 UTC 2015
 . And again, view the additional `app.update` event:
 +
 ----
-$ cf events cf-scale-boot
-Getting events for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf events orders-service-${initials}
+Getting events for app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 
 time                          event                 actor               description
 2015-02-13T16:01:28.00-0600   audit.app.update      swomack@pivotal.io   state: STARTED
 2015-02-13T15:59:10.00-0600   audit.app.update      swomack@pivotal.io   state: STOPPED
 2015-02-13T15:18:33.00-0600   audit.app.update      swomack@pivotal.io   instances: 1
-2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 5
+2015-02-13T15:04:34.00-0600   audit.app.update      swomack@pivotal.io   instances: 3
 2015-02-13T12:56:35.00-0600   audit.app.update      swomack@pivotal.io   state: STARTED
 2015-02-13T12:56:26.00-0600   audit.app.update      swomack@pivotal.io
 2015-02-13T12:56:26.00-0600   audit.app.map-route   swomack@pivotal.io
@@ -122,10 +122,10 @@ Application developers need only log all messages to either `STDOUT` or `STDERR`
 
 Application developers can view application logs using the CF CLI.
 
-. Let's view recent log messages for `cf-scale-boot`:
+. Let's view recent log messages for `orders-service-${initials}`:
 +
 ----
-$ cf logs cf-scale-boot --recent
+$ cf logs orders-service-${initials} --recent
 ----
 +
 Here are two interesting subsets of one output from that command:
@@ -133,8 +133,8 @@ Here are two interesting subsets of one output from that command:
 .CF Component Logs
 ====
 ----
-2015-02-13T14:45:39.40-0600 [RTR/0]      OUT cf-scale-boot-stockinged-rust.cfapps.io - [13/02/2015:20:45:39 +0000] "GET /css/bootstrap.min.css HTTP/1.1" 304 0 "http://cf-scale-boot-stockinged-rust.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36" 10.10.66.88:50372 x_forwarded_for:"50.157.39.197" vcap_request_id:84cc1b7a-bb30-4355-7512-5adaf36ff767 response_time:0.013115764 app_id:7a428901-1691-4cce-b7f6-62d186c5cb55 <1>
-2015-02-13T14:45:39.40-0600 [RTR/1]      OUT cf-scale-boot-stockinged-rust.cfapps.io - [13/02/2015:20:45:39 +0000] "GET /img/LOGO_CloudFoundry_Large.png HTTP/1.1" 304 0 "http://cf-scale-boot-stockinged-rust.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36" 10.10.66.88:24323 x_forwarded_for:"50.157.39.197" vcap_request_id:b3e2466b-6a41-4c6d-5b3d-0f70702c0ec1 response_time:0.010003444 app_id:7a428901-1691-4cce-b7f6-62d186c5cb55
+2015-02-13T14:45:39.40-0600 [RTR/0]      OUT orders-service-${initials}-stockinged-rust.cfapps.io - [13/02/2015:20:45:39 +0000] "GET /css/bootstrap.min.css HTTP/1.1" 304 0 "http://orders-service-${initials}-stockinged-rust.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36" 10.10.66.88:50372 x_forwarded_for:"50.157.39.197" vcap_request_id:84cc1b7a-bb30-4355-7512-5adaf36ff767 response_time:0.013115764 app_id:7a428901-1691-4cce-b7f6-62d186c5cb55 <1>
+2015-02-13T14:45:39.40-0600 [RTR/1]      OUT orders-service-${initials}-stockinged-rust.cfapps.io - [13/02/2015:20:45:39 +0000] "GET /img/LOGO_CloudFoundry_Large.png HTTP/1.1" 304 0 "http://orders-service-${initials}-stockinged-rust.cfapps.io/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.111 Safari/537.36" 10.10.66.88:24323 x_forwarded_for:"50.157.39.197" vcap_request_id:b3e2466b-6a41-4c6d-5b3d-0f70702c0ec1 response_time:0.010003444 app_id:7a428901-1691-4cce-b7f6-62d186c5cb55
 2015-02-13T15:04:33.09-0600 [API/1]      OUT Tried to stop app that never received a start event <2>
 2015-02-13T15:04:33.51-0600 [CELL/12]     OUT Starting app instance (index 2) with guid 7a428901-1691-4cce-b7f6-62d186c5cb55 <3>
 2015-02-13T15:04:33.71-0600 [CELL/4]      OUT Starting app instance (index 3) with guid 7a428901-1691-4cce-b7f6-62d186c5cb55
@@ -162,12 +162,12 @@ These events are properly interleaved based on time, giving you an accurate pict
 . To get a running ``tail'' of the application logs rather than a dump, simply type:
 +
 ----
-$ cf logs cf-scale-boot
+$ cf logs orders-service-${initials}
 ----
 +
 You can try various things like refreshing the browser and triggering stop/start events to see logs being generated. Stop `cf logs <app_name>` output by pressing Ctrl-C.
 
-=== For Operators (SKIP for today's workshop. Consider doing these steps later)
+=== (SKIP for today's workshop. Consider doing these steps later) For Operators 
 
 Application operators will also enjoy commands like `cf logs`, but are often interested in long-term retention, indexing, and analysis of logs as well.
 Cloud Foundry currently only provides short-term retention of logs.
@@ -196,16 +196,16 @@ image::../../Common/images/papertrail_4.png[]
 . We'll use a Cloud Foundry http://docs.cloudfoundry.org/devguide/services/user-provided.html[user-provided service instance] to create the log drain for our application using the URL + Port provided by Papertrail:
 +
 ----
-$ cf cups cf-scale-boot-logs -l syslog://logs2.papertrailapp.com:43882
-Creating user provided service cf-scale-boot-logs in org Workshop / space user1 as swomack@pivotal.io...
+$ cf cups orders-service-${initials}-logs -l syslog://logs2.papertrailapp.com:43882
+Creating user provided service orders-service-${initials}-logs in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 
 . We bind that service instance like those we created in link:../lab_02/lab_02.adoc[Lab 2] (`cf bs` is short for `cf bind-service`):
 +
 ----
-$ cf bs cf-scale-boot cf-scale-boot-logs
-Binding service cf-scale-boot-logs to app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf bs orders-service-${initials} orders-service-${initials}-logs
+Binding service orders-service-${initials}-logs to app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 TIP: Use 'cf restage' to ensure your env variable changes take effect
 ----
@@ -213,7 +213,7 @@ TIP: Use 'cf restage' to ensure your env variable changes take effect
 . We'll use a `cf restart` rather than `cf restage` to make the binding take effect:
 +
 ----
-$ cf restart cf-scale-boot
+$ cf restart orders-service-${initials}
 ----
 
 . Refresh the Papertrail browser tab to see log events immediately flowing to the log viewing page:
@@ -228,10 +228,10 @@ Cloud Foundry's http://docs.cloudfoundry.org/concepts/architecture/#hm9k[Health 
 
 > In this lab, you may want to have two terminal windows open to watch `cf logs` while reviewing `cf events`.
 
-. If you don't have one already running, start a log tail for `cf-scale-boot`:
+. If you don't have one already running, start a log tail for `orders-service-${initials}`:
 +
 ----
-$ cf logs cf-scale-boot
+$ cf logs orders-service-${initials}
 ----
 
 . Visit the application in the browser, and click on the ``Kill Switch'' button. This button will trigger a JVM exit with an error code (`System.exit(1)`), causing the Health Manager to observe an application instance crash:
@@ -264,11 +264,11 @@ Also, if you're paying attention to the log tail, you'll see some interesting lo
 . Check the application events to see another indicator of the crash. Do this in another terminal window or exit `cf logs` by pressing Ctrl-C:
 +
 ----
-$ cf events cf-scale-boot
-Getting events for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf events orders-service-${initials}
+Getting events for app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 
 time                          event                 actor               description
-2015-02-13T17:17:57.00-0600   app.crash             cf-scale-boot       index: 0, reason: CRASHED, exit_description: app instance exited, exit_status: 1
+2015-02-13T17:17:57.00-0600   app.crash             orders-service-${initials}       index: 0, reason: CRASHED, exit_description: app instance exited, exit_status: 1
 ----
 
 . By this time you should have noticed some additional interesting events in the logs:
@@ -297,23 +297,23 @@ image::../../Common/images/cf-scale-boot-healed.png[]
 
 Because of the limited quota we have for this course, let's clean up our application and services to make room for future labs.
 
-. Delete the `cf-scale-boot` application (`cf d` is short for `cf delete`):
+. Delete the `orders-service-${initials}` application (`cf d` is short for `cf delete`):
 +
 ----
-$ cf d cf-scale-boot
+$ cf d orders-service-${initials}
 
-Really delete the app cf-scale-boot?> y
-Deleting app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+Really delete the app orders-service-${initials}?> y
+Deleting app orders-service-${initials} in org Workshop / space user1 as swomack@pivotal.io...
 'OK
 ----
 
-. Delete the `cf-scale-boot-logs` service (`cf ds` is short for `cf delete-service`):
+. Delete the `orders-service-${initials}-logs` service (`cf ds` is short for `cf delete-service`):
 +
 ----
-$ cf ds cf-scale-boot-logs
+$ cf ds orders-service-${initials}-logs
 
-Really delete the service cf-scale-boot-logs?> y
-Deleting service cf-scale-boot-logs in org Workshop / space user1 as swomack@pivotal.io...
+Really delete the service orders-service-${initials}-logs?> y
+Deleting service orders-service-${initials}-logs in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 
