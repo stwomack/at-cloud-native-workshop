@@ -4,39 +4,13 @@
 --
 Cloud Foundry makes the work of horizontally scaling application instances and updating load balancer routing tables easy.
 
-In this lab, we'll use a Spring Boot CLI app designed to illustrate Cloud Foundry operations such as scaling.
---
-
-== Push the `cf-scale-boot` Application
-
-. Change to the `cf-scale-boot` sample application directory:
-+
-----
-$ cd $COURSE_HOME/session_03/lab_03/cf-scale-boot
-----
-
-. Spring Boot CLI applications do not require a separate build step, so go ahead and push the application:
-+
-----
-$ cf push 
-----
-
-. Once again, this application's manifest is configured to have a random route assigned to the application.
-So, when the CLI indicates that application is up and running, visit its route in the browser:
-+
-image::../../Common/images/cf-scale-boot-initial.png[]
-+
-You'll see that the application is reporting various bits of information that it has discovered from its environment.
-Of primary interest is that this application reports its _instance index_.
-It also keeps track of and reports how many web requests that this instance has serviced.
-
 == Scale the Application Up
 
 . Now let's increase the number of running application instances to 5:
 +
 ----
-$ cf scale -i 5 cf-scale-boot
-Scaling app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf scale -i 5 orders-service-${initial}
+Scaling app orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 +
@@ -46,14 +20,14 @@ In reporting `OK`, the CLI is letting you know that the additional requested ins
 +
 ====
 ----
-$ cf app cf-scale-boot
-Showing health and status for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf app orders-service-${initial}
+Showing health and status for app orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 
 requested state: started
 instances: 5/5
 usage: 512M x 5 instances
-urls: cf-scale-boot-stockinged-rust.cfapps.io
+urls: orders-service-${initial}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
      state      since                    cpu    memory           disk
@@ -70,14 +44,14 @@ last uploaded: Fri Feb 13 18:56:29 UTC 2015
 . Eventually all instances will converge to a running state:
 +
 ----
-$ cf app cf-scale-boot
-Showing health and status for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf app orders-service-${initial}
+Showing health and status for app orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 
 requested state: started
 instances: 5/5
 usage: 512M x 5 instances
-urls: cf-scale-boot-stockinged-rust.cfapps.io
+urls: orders-service-${initial}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
      state     since                    cpu    memory           disk
