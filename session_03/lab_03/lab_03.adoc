@@ -1,7 +1,5 @@
 = Lab 3 - Scaling Applications
 
-[abstract]
---
 Cloud Foundry makes the work of horizontally scaling application instances and updating load balancer routing tables easy.
 
 == Scale the Application Up
@@ -62,14 +60,9 @@ last uploaded: Fri Feb 13 18:56:29 UTC 2015
 #4   running   2015-02-13 03:04:52 PM   0.1%   393.4M of 512M   128.9M of 1G
 ----
 
-. Revisit the application route in the browser.
-Refresh several times.
-You should observe the instance index and request counters changing as you do so:
 +
-image::../../Common/images/cf-scale-boot-scaled.png[]
-+
-The aforementioned http://docs.cloudfoundry.org/concepts/architecture/router.html[(Go)Router] is applying a random routing algorithm to all of the application instances assigned to this route.
-As an instance reaches the `running` state, its http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html[DEA] registers that instance in the routing table assigned to its route by sending a message to Cloud Foundry's message bus.
+The http://docs.cloudfoundry.org/concepts/architecture/router.html[(Go)Router] is applying a random routing algorithm to all of the application instances assigned to this route.
+As an instance reaches the `running` state, the https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html[Diego cell] registers that instance in the routing table assigned to its route by sending a message to Cloud Foundry's message bus.
 All (Go)Router instances are subscribed to this channel and register the routes independently.
 This makes for very dynamic and rapid reconfiguration!
 
@@ -78,22 +71,22 @@ This makes for very dynamic and rapid reconfiguration!
 . We can scale the application instances back down as easily as we scaled them up, using the same command structure:
 +
 ----
-$ cf scale -i 1 cf-scale-boot
-Scaling app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf scale -i 1 orders-service-${initial}
+Scaling app  orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 ----
 
 . Check the application status again:
 +
 ----
-$ cf app cf-scale-boot
-Showing health and status for app cf-scale-boot in org Workshop / space user1 as swomack@pivotal.io...
+$ cf app orders-service-${initial}
+Showing health and status for app orders-service-${initial} in org Workshop / space user1 as swomack@pivotal.io...
 OK
 
 requested state: started
 instances: 1/1
 usage: 512M x 1 instances
-urls: cf-scale-boot-stockinged-rust.cfapps.io
+urls: orders-service-${initial}-stockinged-rust.cfapps.io
 last uploaded: Fri Feb 13 18:56:29 UTC 2015
 
      state     since                    cpu    memory         disk
@@ -101,9 +94,5 @@ last uploaded: Fri Feb 13 18:56:29 UTC 2015
 ----
 +
 As you can see, we're back down to only one instance running, and it is in fact the original index 0 that we started with.
-
-. Confirm that by again revisiting the route in the browser and checking the instance index and request counter:
-+
-image::../../Common/images/cf-scale-boot-unscaled.png[]
 
 link:/README.md#course-materials[Course Materials home] | link:/session_03/lab_04/lab_04.adoc[Lab 4 - Monitoring Applications]
