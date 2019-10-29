@@ -112,7 +112,7 @@ Note that this time we're adding '-b java_buildpack_offline' in order to speed u
 .  Bind the application to the config server we created at the beginning of this lab
 +
 ----
-cf bind-service orders-service-${your-initials} config-server
+cf bind-service orders-service-${your-initials} config-server-${your-initials}
 ----
 
 .  Start the app and verify that it's no longer getting the default message when the '/message' endpoint is invoked
