@@ -23,15 +23,15 @@ Let's change that.
 
 == The Services Marketplace
 
-```
-https://apps.sys.cloud-02.pcf.ascension.org
-```
-
 There are two ways to discover what services are available on Pivotal Cloud Foundry.
 The first is available on any instance of Cloud Foundry: the CLI. Just type:
 
 ----
-$ cf marketplace
+cf marketplace
+----
+
+----
+https://apps.sys.cloud-02.pcf.ascension.org
 ----
 
 and you'll get a list of services, their available plans, and descriptions.
