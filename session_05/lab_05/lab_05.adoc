@@ -25,7 +25,7 @@ cd $COURSE_HOME/session_05/lab_05/initial/hello-spring-boot
 . Run the application:
 +
 ----
-mvn spring-boot:run
+./mvnw spring-boot:run
 ----
 
 . Try out the following endpoints. The output is omitted here because it can be quite large:
