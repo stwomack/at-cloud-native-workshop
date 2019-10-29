@@ -30,9 +30,7 @@ The first is available on any instance of Cloud Foundry: the CLI. Just type:
 cf marketplace
 ----
 
-----
-https://apps.sys.cloud-02.pcf.ascension.org
-----
+link:/https://apps.sys.cloud-02.pcf.ascension.org[Your PCF GUI]
 
 and you'll get a list of services, their available plans, and descriptions.
 
