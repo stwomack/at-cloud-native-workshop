@@ -25,27 +25,26 @@ cd $COURSE_HOME/session_05/lab_05/initial/hello-spring-boot
 . Run the application:
 +
 ----
-./mvnw spring-boot:run
+mvn spring-boot:run
 ----
 
 . Try out the following endpoints. The output is omitted here because it can be quite large:
 +
-http://localhost:8080/beans:: Dumps all of the beans in the Spring context.
-http://localhost:8080/autoconfig:: Dumps all of the auto-configuration performed as part of application bootstrapping.
-http://localhost:8080/configprops:: Displays a collated list of all `@ConfigurationProperties`.
-http://localhost:8080/env:: Dumps the application's shell environment as well as all Java system properties.
-http://localhost:8080/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
-http://localhost:8080/dump:: Performs a thread dump.
-http://localhost:8080/trace:: Displays trace information (by default the last few HTTP requests).
+http://localhost:8080/actuator/beans:: Dumps all of the beans in the Spring context.
+http://localhost:8080/actuator/configprops:: Displays a collated list of all `@ConfigurationProperties`.
+http://localhost:8080/actuator/env:: Dumps the application's shell environment as well as all Java system properties.
+http://localhost:8080/actuator/mappings:: Dumps all URI request mappings and the controller methods to which they are mapped.
+http://localhost:8080/actuator/threaddump:: Performs a thread dump.
+http://localhost:8080/actuator/httptrace:: Displays trace information (by default the last few HTTP requests).
 
 == Build and Version Control Info
 
-Spring Boot provides an endpoint (http://localhost:8080/info) that allows the exposure of arbitrary metadata.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/info) that allows the exposure of arbitrary metadata.
 
 One thing that it does well is expose information about the specific build and version control coordinates for a given deployment.
 
 . Add the following plugin to your Maven build.
-It will add Git branch and commit coordinates to the `/info` endpoint:
+It will add Git branch and commit coordinates to the `/actuator/info` endpoint:
 +
 ----
 <plugin>
@@ -70,7 +69,7 @@ info:
     version: '@project.version@'
 ----
 +
-These will add the project's Maven coordinates to the `/info` endpoint. The Spring Boot Maven plugin will cause them to automatically be replaced in the assembled JAR.
+These will add the project's Maven coordinates to the `/actuator/info` endpoint. The Spring Boot Maven plugin will cause them to automatically be replaced in the assembled JAR.
 
 . Run the application:
 +
@@ -78,7 +77,7 @@ These will add the project's Maven coordinates to the `/info` endpoint. The Spri
 ./mvnw spring-boot:run
 ----
 
-. Visit the application in the browser (http://localhost:8080/info), and verify that the output is similar to the following:
+. Visit the application in the browser (http://localhost:8080/actuator/info), and verify that the output is similar to the following:
 +
 ----
 {
@@ -100,7 +99,7 @@ These will add the project's Maven coordinates to the `/info` endpoint. The Spri
 
 == Health Indicators
 
-Spring Boot provides an endpoint (http://localhost:8080/health) that allows for the notion of various health indicators.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/health) that allows for the notion of various health indicators.
 
 . Normally, when Spring Security is not enabled, the `/health` endpoint will only expose an `UP` or `DOWN` value.
 To simplify working with the endpoint for this lab, we will turn off its sensitivity.
@@ -114,6 +113,8 @@ endpoints:
 . Create the class `io.pivotal.spring.hello.FlappingHealthIndicator` and into it paste the following code:
 +
 ----
+package io.pivotal.spring.hello;
+
 import java.util.Random;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
@@ -144,7 +145,7 @@ This demo health indicator will randomize the health check.
 ./mvnw spring-boot:run
 ----
 
-. Visit the application in the browser (http://localhost:8080/health), and verify that the output is similar to the following (and changes randomly!):
+. Visit the application in the browser (http://localhost:8080/actuator/health), and verify that the output is similar to the following (and changes randomly!):
 +
 ----
 {
@@ -164,53 +165,81 @@ This demo health indicator will randomize the health check.
 
 == Metrics
 
-Spring Boot provides an endpoint (http://localhost:8080/metrics) that exposes several automatically collected metrics for your application.
+Spring Boot provides an endpoint (http://localhost:8080/actuator/metrics) that exposes several automatically collected metrics for your application.
 It also allows for the creation of custom metrics.
 
 . Create the class `io.pivotal.spring.hello.GreetingService` and into it paste the following code:
 +
 ----
-import org.springframework.beans.factory.annotation.Autowired;
+package io.pivotal.spring.hello;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter.Type;
+import io.micrometer.core.instrument.MeterRegistry;
+
 
 @Component
 public class GreetingService {
 
-    @Autowired
-    CounterService counterService;
-
     @Value("${greeting}")
     String greeting;
 
-    public String getGreeting() {
-        counterService.increment("counter.services.greeting.invoked");
+	@Bean
+	MeterRegistryCustomizer<MeterRegistry> addCounterRegistry() {
+	    return registry -> registry.config().namingConvention().name("counter.services.greeting.invoked", Type.COUNTER);
+	}
+	
+	private final Counter greetingCounter;
+	
+	public GreetingService(MeterRegistry registry) {       
+        this.greetingCounter = registry.counter("counter.services.greeting.invoked");
+    }
+	
+	public String getGreeting() {
+		this.greetingCounter.increment();
         return greeting;
     }
+	
 }
 ----
 +
-This class is using the `@Autowired` `CounterService` to count the number of times that the `getGreeting()` method has been invoked.
+This class is using Micrometer, which is now integrated into Spring Boot 2.x. This service counts the number of times that the `getGreeting()` method has been invoked.
 
 . Refactor the contents of the class `io.spring.hello.HelloSpringBootApplication`:
 +
 ----
-// imports
+package io.pivotal.spring.hello;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// contents of class HelloSpringBootApplication
-@Autowired
-private GreetingService greetingService;
+@SpringBootApplication
+@RestController
+public class HelloSpringBootApplication {
 
-@RequestMapping("/")
-public String hello() {
-    return String.format("%s World!", greetingService.getGreeting());
-}
+	@Autowired
+	private GreetingService greetingService;
+	
+    @Value("${greeting}")
+    String greeting;
 
-public static void main(String[] args) {
-    SpringApplication.run(HelloSpringBootApplication.class, args);
+    @RequestMapping("/")
+    public String hello() {
+        return String.format("%s World!", greetingService.getGreeting());
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(HelloSpringBootApplication.class, args);
+    }
 }
 ----
 +

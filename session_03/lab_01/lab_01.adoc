@@ -31,21 +31,23 @@ Spring Boot Actuator
 Spring Security
 Lombok
 ----
-. Click 'Generate Project', and save the .zip file to this directory $COURSE_HOME/session_03/lab_01 ($COURSE_HOME is a pointer to where you cloned this repo )
+. Click 'Generate Project', and save the .zip file to this directory `$COURSE_HOME/session_03/lab_01` ($COURSE_HOME is a pointer to where you cloned this repo )
 . Unzip the project
 . Delete the .zip file
-. Copy ( or move ) the manifest.yml file from this directory into the newly extracted project directory
+. Copy ( or move ) the `manifest.yml` file from this directory into the newly extracted project directory
 . ```- name: orders-service-${initials}``` should be changed to reflect your actual initials. Otherwise everyone will clash
 . For the following steps, use your favorite IDE or file editor
-. Add the following properties to the file src/main/resources/application.properties
+. Add the following properties to the file `src/main/resources/application.properties`
 +
 ```
 security.basic.enabled=false
 management.security.enabled=false
 spring.jpa.hibernate.ddl-auto=create
 spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
+management.endpoint.health.show-details=always
+management.endpoints.web.exposure.include=*
 ```
-. Create a class, OrderItem.java, in src/main/java/com/workshop , and paste in the following contents:
+. Create a class, `OrderItem.java`, in `src/main/java/com/workshop/ordersservice`, and paste in the following contents:
 +
 ```
 package com.workshop.ordersservice;
@@ -77,7 +79,7 @@ public class OrderItem {
 ```
 +
 Note that project Lombok takes care of boilerplate code like getters & setters
-. Finally, replace the contents of /src/main/java/com/workshop/OrderServiceApplication.java with the following
+. Finally, replace the contents of `/src/main/java/com/workshop/ordersservice/OrderServiceApplication.java` with the following
 ```
 package com.workshop.ordersservice;
 
@@ -86,7 +88,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -129,7 +130,7 @@ public class OrdersServiceApplication {
     public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
         @Override
-        public void configure(WebSecurity web) throws Exception {
+        public void configure(WebSecurity web) {
             web.ignoring().antMatchers("/**");
         }
     }
@@ -274,16 +275,14 @@ You can get the same output at any time by typing `cf app orders-service-bridele
 +
 In the example `cf push` above, the `urls:` section of the application health reports `orders-service-brideless-subhero.cfapps.io`, so http://orders-service-brideless-subhero.cfapps.io would have been used to examine this example deployed application. But use the url from your application deployment health report.
 
-. We've just built out the most simple of RESTful APIs, with hypermedia support included. View the /orderItems endpoint of your application to see what has already been added in the database
+. We've just built out the most simple of RESTful APIs, with hypermedia support included. 
 
-Because our application knows nothing about any backing databases, and h2 is on the classpath, h2's in memory database will be used when this application starts up. Look at the /actuator/health actuator endpoint of your application to see that there's no backing database reported. In the next lab, we'll bind a backing database
-```
-"db": {
-"status": "UP",
-"database": "H2",
-"hello": 1
-}
-```
+. View the `/orderItems` endpoint of your application to see what has already been added in the database
 
+Because our application knows nothing about any backing databases, and h2 is on the classpath, h2's in memory database will be used when this application starts up. Look at the `/actuator/health` actuator endpoint of your application to see that there's no backing database reported. In the next lab, we'll bind a backing database
+```
+{"status":"UP","details":{"diskSpace":{"status":"UP","details":{"total":1073741824,"free":904355840,"threshold":10485760}},
+"db":{"status":"UP","details":{"database":"H2","hello":1}}}}
+```
 
 link:/README.md#course-materials[Course Materials home] | link:/session_03/lab_02/lab_02.adoc[Lab 2 - Binding to Cloud Foundry Services]

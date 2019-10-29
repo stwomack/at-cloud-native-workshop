@@ -27,10 +27,29 @@ cd $COURSE_HOME/session_03/lab_01/orders-service
 . Add the config client dependency to your pom.yml:
 +
 ----
-  <dependency>
-      <groupId>io.pivotal.spring.cloud</groupId>
-      <artifactId>spring-cloud-services-starter-config-client</artifactId>
-  </dependency>
+	<dependencies>
+	  <dependency>
+	      <groupId>io.pivotal.spring.cloud</groupId>
+	      <artifactId>spring-cloud-services-starter-config-client</artifactId>
+	  </dependency>
+	</dependencies>
+  
+  ...
+  ...
+  
+  <dependencyManagement>
+    <dependencies>
+    
+        <dependency>
+            <groupId>io.pivotal.spring.cloud</groupId>
+            <artifactId>spring-cloud-services-dependencies</artifactId>
+            <version>2.1.2.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+	
+    </dependencies>
+  </dependencyManagement>
 ----
 
 . Create a new endpoint to demonstrate configuration settings, by adding the following class to /src/main/java/com/workshop/OrderServiceApplication.java
@@ -73,6 +92,7 @@ security.basic.enabled=false
 management.security.enabled=false
 spring.jpa.hibernate.ddl-auto=create
 spring.jpa.database-platform=org.hibernate.dialect.MySQL55Dialect
+management.endpoint.health.show-details=always
 message=Default Message
 ```
 

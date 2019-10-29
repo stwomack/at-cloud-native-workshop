@@ -1,4 +1,17 @@
 greeting: Hello
+endpoints:
+  health:
+    sensitive: false
+
+info:
+  build:
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+    
+management.endpoint.health.show-details: always
+management.endpoints.web.exposure.include: '*'
 
 ---
 
