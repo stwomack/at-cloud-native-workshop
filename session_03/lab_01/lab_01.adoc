@@ -130,7 +130,7 @@ public class OrdersServiceApplication {
     public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
         @Override
-        public void configure(WebSecurity web) throws Exception {
+        public void configure(WebSecurity web) {
             web.ignoring().antMatchers("/**");
         }
     }
