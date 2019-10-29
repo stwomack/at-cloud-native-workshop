@@ -11,7 +11,7 @@
 . Create the services the demo application depends on, first start with an instance of the config service.
 +
 ----
-cf create-service p.config-server standard config-server -c '{"git": { "uri": "https://github.com/stwomack/womack-configrepo" } }'
+cf create-service p.config-server standard config-server-${your-initials} -c '{"git": { "uri": "https://github.com/stwomack/womack-configrepo" } }'
 Creating service instance config-server in org my-org / space development as student20...
 OK
 ----
@@ -112,7 +112,7 @@ Note that this time we're adding '-b java_buildpack_offline' in order to speed u
 .  Bind the application to the config server we created at the beginning of this lab
 +
 ----
-cf bind-service orders-service config-server
+cf bind-service orders-service-${your-initials} config-server
 ----
 
 .  Start the app and verify that it's no longer getting the default message when the '/message' endpoint is invoked
